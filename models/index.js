@@ -11,6 +11,8 @@ User.belongsTo(Department,{
     onDelete:'SET NULL'
 });
 
+User.hasMany(User,{as:'employees',foreignKey:'approver_id'});
+User.belongsTo(User,{as:'supervisor',foreignKey:'approver_id'});
 
 
 

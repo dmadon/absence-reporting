@@ -27,7 +27,7 @@ User.init(
             type: DataTypes.STRING,
             allowNull:false,
         },
-        is_sup:{
+        is_approver:{
             type: DataTypes.BOOLEAN,
             allowNull: false
         },
@@ -39,8 +39,8 @@ User.init(
                 key:'id'
             }
         },
-        sup_id:{
-            type:DataTypes.STRING,
+        approver_id:{
+            type:DataTypes.INTEGER,
             allowNull:true,
             references:{
                 model:'user',
