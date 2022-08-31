@@ -1,5 +1,5 @@
 const router = require('express').Router();
-// const {MODEL NAMES GO HERE, SEPARATED BY A COMMA} = require('../../models');
+// const {User, Absence} = require('../../models');
 
 // THESE ARE THE '/api/absences' ROUTES:
 
