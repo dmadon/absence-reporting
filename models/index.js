@@ -12,7 +12,7 @@ User.belongsTo(Department,{
 });
 
 User.hasMany(User,{as:'employees',foreignKey:'approver_id'});
-User.belongsTo(User,{as:'supervisor',foreignKey:'approver_id'});
+User.belongsTo(User,{as:'approver',foreignKey:'approver_id'});
 
 
 

@@ -6,11 +6,17 @@ const {User, Department} = require('../../models');
 // GET ALL USERS
 router.get('/',(req,res) => {
     User.findAll({
+        attributes:{exclude:['password']},
         include:[
             {
                 model:User,
-                as:'supervisor',
-                attributes:['first_name','last_name']
+                as:'approver',
+                attributes:['id','first_name','last_name']
+            },
+            {
+                model:User,
+                as:'employees',
+                attributes:['id','first_name','last_name']
             }
         ]
     })
@@ -18,8 +24,44 @@ router.get('/',(req,res) => {
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
+    });
+});
+
+// GET A SINGLE USER BY ID
+router.get('/:id',(req,res) => {
+    User.findOne({
+        where:{
+            id:req.params.id
+        },
+        attributes:{exclude:['password']},
+        include:[
+            {
+                model:User,
+                as:'approver',
+                attributes:['id','first_name','last_name']
+            },
+            {
+                model:User,
+                as:'employees',
+                attributes:['id','first_name','last_name']
+            }
+        ]
     })
-})
+    .then(dbUserData => {
+        if(!dbUserData){
+            res.status(404).json({message:'Sorry, no user was found with that id.'});
+            return;
+        }
+        else{
+            res.json(dbUserData)
+        }   
+    })        
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
 
 // CREATE NEW USER
 router.post('/',(req,res) => {
@@ -48,6 +90,53 @@ router.post('/',(req,res) => {
         res.status(500).json(err);
     });
 });
+
+// UPDATE USER INFO
+router.put('/:id',(req,res) => {
+    User.update(req.body,{
+        individualHooks:true,
+        
+        where:{
+            id:req.params.id
+        }
+    })
+    .then(dbUserData => {
+        if(!dbUserData){
+            res.status(404).json({message:'Sorry, no user was found with that id.'});
+            return;
+        }
+        else{
+            res.json(dbUserData)
+        }
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
+// DELETE A USER
+router.delete('/:id',(req,res) =>{
+    User.destroy({
+        where:{
+            id: req.params.id
+        }
+    })
+    .then(dbUserData => {
+        if(!dbUserData){
+            res.status(404).json({message:'Sorry, no user was found with that id.'});
+            return;
+        }
+        else{
+            res.json(dbUserData);
+        }
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
 
 
 module.exports = router;
