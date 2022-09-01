@@ -115,6 +115,54 @@ router.put('/:id',(req,res) => {
     });
 });
 
+// LOGIN AN EXISTING USER
+router.post('/login',(req,res) => {
+    User.findOne({
+        where:{
+            email:req.body.email
+        }
+    })
+    .then(dbUserData => {
+        if(!dbUserData){
+            res.status(404).json({message:'Sorry, no user was found with that id.'});
+            return;
+        }
+        const validPassword = dbUserData.checkPassword(req.body.password);
+
+        if(!validPassword){
+            res.status(400).json({message:'Invalid password.'});
+            return;
+        }
+        else{
+            req.session.save(() => {
+                req.session.user_id = dbUserData.id;
+                req.session.first_name = dbUserData.first_name;
+                req.session.last_name = dbUserData.last_name;
+                req.session.is_approver = dbUserData.is_approver;
+                req.session.loggedIn = true;
+
+                res.json({user:dbUserData,message:'You are logged in!'});
+            })
+        };
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
+// LOGOUT A USER
+router.post('/logout',(req,res) => {
+    if(req.session.loggedIn){
+        req.session.destroy(() => {
+            res.status(204).end();
+        })
+    }
+    else{
+        res.status(404).end();
+    }
+});
+
 // DELETE A USER
 router.delete('/:id',(req,res) =>{
     User.destroy({
@@ -136,6 +184,7 @@ router.delete('/:id',(req,res) =>{
         res.status(500).json(err);
     });
 });
+
 
 
 

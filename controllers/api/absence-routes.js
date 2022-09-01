@@ -13,7 +13,7 @@ router.get('/',(req,res) => {
                 include:{
                     model:User,
                     as:'approver',
-                    attributes:['id','first_name','last_name']
+                    attributes:['id','first_name','last_name','email']
                 }
             }
         ]
