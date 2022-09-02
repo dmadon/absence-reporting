@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const {User, Absence} = require('../../models');
+const withAuth = require('../../utils/auth');
+
 
 // THESE ARE THE '/api/absences' ROUTES:
 
@@ -27,7 +29,7 @@ router.get('/',(req,res) => {
 
 
 // CREATE A NEW ABSENCE
-router.post('/',(req,res) => {
+router.post('/',withAuth,(req,res) => {
     Absence.create({
         start_date:req.body.start_date,
         end_date:req.body.end_date,
@@ -35,19 +37,61 @@ router.post('/',(req,res) => {
         leave_type_id:req.body.leave_type_id,
         status:req.body.status,
         // ----------------USE THE USER_ID FROM THE SESSION ONCE THE USER IS LOGGED IN
-        user_id:req.body.user_id
+        user_id:req.session.user_id
     })
     .then(dbAbsenceData => res.json(dbAbsenceData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
     });
-})
+});
+
+// UPDATE AN ABSENCE
+router.put('/:id',withAuth,(req,res) => {
+    Absence.update(req.body,{
+        where:{
+            id: req.params.id,
+        },
+        individualHooks:true
+    })
+    .then(dbAbsenceData => {
+        if(!dbAbsenceData){
+            res.status(404).json({message:'No absence found with that id.'});
+            return;
+        }
+        res.json(dbAbsenceData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
+// DELETE AN ABSENCE
+router.delete('/:id',withAuth,(req,res) => {
+    Absence.destroy({
+        where:{
+            id:req.params.id
+        }
+    })
+    .then(dbAbsenceData => {
+        if(!dbAbsenceData){
+            res.status(404).json({message:'No absence was found with that id.'});
+            return;
+        }
+        res.json(dbAbsenceData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
+// APPROVE AN ABSENCE
+router.put('/approve/:id',)
 
 
 
 
 
-
-
-module.exports = router;
+module.exports = router; 
