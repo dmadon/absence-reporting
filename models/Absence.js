@@ -2,7 +2,17 @@ const {Model,DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
 
 
-class Absence extends Model{}
+class Absence extends Model{
+    checkApproverId(currentUserId,absenceApproverId){
+        if(currentUserId == absenceApproverId){
+            return true;
+        }
+        else{
+            // alert('You are not authorized to edit this absence');
+            return false;
+        }
+    }
+}
 
 Absence.init(
     {
