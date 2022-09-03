@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {User, Absence} = require('../../models');
+const {User, Absence, Leave} = require('../../models');
 const withAuth = require('../../utils/auth');
 
 
@@ -10,6 +10,9 @@ const withAuth = require('../../utils/auth');
 router.get('/',withAuth,(req,res) => {
     Absence.findAll({
         include:[
+            {
+                model:Leave
+            },
             {
                 model:User,
                 include:{
@@ -34,6 +37,9 @@ router.get('/:id',withAuth,(req,res) => {
             id:req.params.id
         },
         include:[
+            {
+                model:Leave
+            },
             {
                 model:User,
                 include:{
@@ -66,7 +72,6 @@ router.post('/',withAuth,(req,res) => {
         absence_hours:req.body.absence_hours,
         leave_type_id:req.body.leave_type_id,
         status:req.body.status,
-
         user_id:req.session.user_id
     })
     .then(dbAbsenceData => res.json(dbAbsenceData))
@@ -118,7 +123,7 @@ router.delete('/:id',withAuth,(req,res) => {
 });
 
 // APPROVE AN ABSENCE
-router.put('/approval/:id',(req,res) => {
+router.put('/approval/:id',withAuth,(req,res) => {
     Absence.findOne({
         where:{
             id:req.params.id
@@ -149,7 +154,7 @@ router.put('/approval/:id',(req,res) => {
         else{
             Absence.update(
                 {
-                    status:'approved'
+                    status:'Approved'
                 },
                 {
                     where:{
@@ -163,7 +168,7 @@ router.put('/approval/:id',(req,res) => {
 });
 
 // DENY AN ABSENCE
-router.put('/denial/:id',(req,res) => {
+router.put('/denial/:id',withAuth,(req,res) => {
     Absence.findOne({
         where:{
             id:req.params.id
@@ -194,7 +199,7 @@ router.put('/denial/:id',(req,res) => {
         else{
             Absence.update(
                 {
-                    status:'denied'
+                    status:'Denied'
                 },
                 {
                     where:{
