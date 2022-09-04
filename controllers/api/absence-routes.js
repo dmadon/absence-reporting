@@ -87,18 +87,31 @@ router.put('/:id',withAuth,(req,res) => {
         where:{
             id: req.params.id,
         },
-        individualHooks:true
+        individualHooks:true,
     })
     .then(dbAbsenceData => {
         if(!dbAbsenceData){
             res.status(404).json({message:'No absence found with that id.'});
             return;
-        }
-        res.json(dbAbsenceData);
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
+        }          
+
+        else{
+            Absence.update(
+                {
+                    status:'Pending'
+                },
+                {
+                    where:{
+                        id: req.params.id
+                    }
+                }
+            )
+            .then(statusUpdate => res.json(statusUpdate))
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
+        };
     });
 });
 
@@ -163,7 +176,11 @@ router.put('/approval/:id',withAuth,(req,res) => {
                 }
             )
             .then(statusUpdate => res.json(statusUpdate))
-        }
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
+        };
     });
 });
 

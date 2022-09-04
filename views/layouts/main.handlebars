@@ -13,14 +13,15 @@
     
         <header class="hero flex-row justify-space-between">
         
-                <nav class="flex-row justify-space-between align-text-bottom">
-                    <a  href="/" class="nav-item"><h3>Home</h3></a>
-                    <a  button id="dashboard" class="nav-item btn-no-style"><h3>Dashboard</h3></a>
+                <nav class="flex-row align-center">
                     {{#if loggedIn}}
-                    <button id="logout" class="btn-no-style nav-item"><h3>Log Out</h3></button>
-                    {{else}}
-                    <a  href="/" class="nav-item decoration-none"><h3>Log In</h3></a>
+                        <a href='/dashboard' id="dashboard" class="nav-item btn-no-style"><h3>Dashboard</h3></a>
+                        <button id="logout" class="btn-no-style nav-item"><h3>Log Out</h3></button>
                     {{/if}}
+                    {{#if is_approver}}
+                       <a href='/approval-queue' id="approval-queue" class="nav-item btn-no-style"><h3>Approval Queue</h3></a>
+                    {{/if}}
+
                 </nav>
                 <h1>
                     <a class="app-title" href="/">Employee Absence Reporting</a>
@@ -35,3 +36,7 @@
             CMD Financial, Inc.
         </footer>
     </div>
+
+{{#if loggedIn}}
+<script src="/javascript/logout.js"></script>
+{{/if}}

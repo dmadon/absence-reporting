@@ -1,0 +1,40 @@
+<div class="flex-row justify-space-between align-center">
+    <h1>Approval Queue: {{username}}</h1>
+ 
+</div>
+
+{{#each absence}}
+<article class="card">
+
+
+    <div class="card-header flex-row justify-space-between align-center">
+        <div>
+            <h1>{{user.first_name}} {{user.last_name}}</h1>
+        </div>
+        <div>
+            <h1>{{format_date start_date}} - {{format_date end_date}}</h1>
+            {{!-- <h4>Created {{format_date created_at}}, last updated {{ format_date updated_at}}</h4> --}}
+        </div>
+        <div class="data-item">
+            <h1>{{leave.leave_type}}</h1>
+        </div>
+        <div class="data-item">
+            <h1>{{absence_hours}} hours</h1>
+        </div>
+        <div class="data-item">
+            <button id="approve-btn" class="btn" data-record="{{id}}">Approve</button>
+            <button id="deny-btn" class="btn" data-record="{{id}}">Deny</button>
+        </div>
+        
+        
+        {{!-- <a class="btn" href="/dashboard/edit-absence/{{id}}"><h3 class="text-center">Edit Absence</h3></a> --}}
+        
+    </div>
+
+
+</article>
+
+
+{{/each}}
+
+<script src="/javascript/absence-approval.js"></script>

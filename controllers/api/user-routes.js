@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {User, Department} = require('../../models');
+const {User, Department, Absence} = require('../../models');
 
 // THESE ARE THE '/api/users' ROUTES:
 
@@ -16,7 +16,11 @@ router.get('/',(req,res) => {
             {
                 model:User,
                 as:'employees',
-                attributes:['id','first_name','last_name']
+                attributes:['id','first_name','last_name'],
+                include:{
+                    model:Absence,
+                    attributes:['id','start_date','end_date','absence_hours','leave_type_id','status','created_at','updated_at'],
+                }
             }
         ]
     })
@@ -43,7 +47,11 @@ router.get('/:id',(req,res) => {
             {
                 model:User,
                 as:'employees',
-                attributes:['id','first_name','last_name']
+                attributes:['id','first_name','last_name'],
+                include:{
+                    model:Absence,
+                    attributes:['id','start_date','end_date','absence_hours','leave_type_id','status','created_at','updated_at'],
+                }
             }
         ]
     })
@@ -138,6 +146,7 @@ router.post('/login',(req,res) => {
                 req.session.user_id = dbUserData.id;
                 req.session.first_name = dbUserData.first_name;
                 req.session.last_name = dbUserData.last_name;
+                req.session.username = `${dbUserData.first_name} ${dbUserData.last_name}`;
                 req.session.is_approver = dbUserData.is_approver;
                 req.session.loggedIn = true;
 
