@@ -8,7 +8,6 @@ class Absence extends Model{
             return true;
         }
         else{
-            // alert('You are not authorized to edit this absence');
             return false;
         }
     }

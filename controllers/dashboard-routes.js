@@ -74,7 +74,7 @@ router.get('/edit-absence/:id',withAuth,(req,res) => {
             }
         ]
     })
-    .then(dbAbsenceData => {
+    .then(async dbAbsenceData => {
         if(!dbAbsenceData){
             res.status(404).json({message:"No absence was found with that id."});
             return;
@@ -82,7 +82,17 @@ router.get('/edit-absence/:id',withAuth,(req,res) => {
 
         const absence = dbAbsenceData.get({plain:true});
 
+        const leave_options = await
+            Leave.findAll({
+                order:['id']
+            })
+            .then(leaveData => {
+                const types = leaveData.map(type => type.get({plain:true}));
+                return types
+            })
+        console.log(leave_options)
         res.render('edit-absence',{
+            leave_options,
             absence,
             user_id:req.session.user_id,
             loggedIn:req.session.loggedIn,
