@@ -13,19 +13,18 @@
             <h4>Created {{format_date created_at}}, last updated {{ format_date updated_at}}</h4>
             </a>
         </div>
-        <div class="data-item">
+        <div class="data-item-med">
             <h1>{{leave.leave_type}}</h1>
         </div>
-        <div class="data-item">
+        <div class="data-item-med">
             <h1>{{absence_hours}} hours</h1>
         </div>
-        <div class="data-item">
+        <div class="data-item-med">
             <h1>{{status}}</h1>
-        </div>
+        </div class="data-item-med">
         
-        
+        <button id="delete-btn" class="btn" data-record="{{id}}">Delete Absence</button>
         <a class="btn" href="/dashboard/edit-absence/{{id}}"><h3 class="text-center">Edit Absence</h3></a>
-        
     </div>
 
 
@@ -34,5 +33,7 @@
 
 {{/each}}
 
-<script src="/javascript/edit-absence.js"></script>
+{{#if absence}}
+<script src="/javascript/delete-absence.js"></script>
+{{/if}}
 <script src="/javascript/new-absence.js"></script>

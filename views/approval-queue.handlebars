@@ -11,16 +11,16 @@
         <div>
             <h1>{{user.first_name}} {{user.last_name}}</h1>
         </div>
-        <div>
-            <h1>{{format_date start_date}} - {{format_date end_date}}</h1>
+        <div class="data-item-long">
+            <h1 >{{format_date start_date}} - {{format_date end_date}}</h1>
         </div>
-        <div class="data-item">
+        <div class="data-item-med">
             <h1>{{leave.leave_type}}</h1>
         </div>
-        <div class="data-item">
+        <div class="data-item-med">
             <h1>{{absence_hours}} hours</h1>
         </div>
-        <div class="data-item">
+        <div class="data-item-med">
             <button id="approve-btn" class="btn" data-record="{{id}}">Approve</button>
             <button id="deny-btn" class="btn" data-record="{{id}}">Deny</button>
         </div>

@@ -204,7 +204,11 @@ nav {
   color: rgb(29, 153, 255);
 }
 
-.data-item {
+.data-item-long {
+  min-width: 20%;
+}
+
+.data-item-med {
   min-width: 15%;
 }
 

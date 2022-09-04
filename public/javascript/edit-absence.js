@@ -12,13 +12,13 @@ async function saveChanges(event){
 
     const response = await fetch (`/api/absences/${id}`,{
         method:'PUT',
+        headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
             start_date,
             end_date,
             leave_type_id,
             absence_hours
-        }),
-        headers:{'Content-Type':'application/json'}
+        })        
     })
     if(response.ok){
         document.location.replace('/dashboard');

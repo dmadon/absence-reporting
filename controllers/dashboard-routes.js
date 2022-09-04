@@ -45,9 +45,19 @@ router.get('/',withAuth,(req,res) => {
 
 
 // NEW ABSENCE VIEW WHERE USERS CAN CREATE A NEW ABSENCE
-router.get('/new-absence',withAuth,(req,res) => {
+router.get('/new-absence',withAuth, async (req,res) => {
+
+    const leave_options = await
+            Leave.findAll({
+                order:['id']
+            })
+            .then(leaveData => {
+                const types = leaveData.map(type => type.get({plain:true}));
+                return types
+            })
    
     res.render('new-absence',{
+        leave_options,
         user_id:req.session.user_id,
         loggedIn:req.session.loggedIn,
         username:req.session.username})

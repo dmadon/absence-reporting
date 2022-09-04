@@ -2,7 +2,7 @@ async function approveAbsence(event){
     
     event.preventDefault();
 
-    id = event.target.getAttribute("data-record");
+    const id = event.target.getAttribute("data-record");
 
     const response = await fetch (`/api/absences/approval/${id}`, {
         method:'PUT',
