@@ -61,9 +61,13 @@ p {
   transform: translate(-1px, -1px);
 }
 
-.comment-form .btn, .edit-post-form .btn, .new-post-form .btn,#create-post-btn{
+.comment-form .btn, .edit-absence-form .btn, .new-absence-form .btn, #new-absence-btn {
   width: 25%;
   ;
+}
+
+.card .btn{
+  width: 15%
 }
 
 .save-btn{
@@ -200,6 +204,14 @@ nav {
   color: rgb(29, 153, 255);
 }
 
+.data-item-long {
+  min-width: 20%;
+}
+
+.data-item-med {
+  min-width: 15%;
+}
+
 /* CARDS */
 .card {
   margin: 0 0 20px 0;
@@ -218,7 +230,7 @@ nav {
   border-radius: calc(.18rem - 1px) calc(.18rem - 1px) 0 0;
 }
 
-.card-header h1, .card-header h4, .hero h3{
+.card-header h1, .card-header h3, .card-header h4, .hero h3{
   color: var(--primary);
 
 }
@@ -289,6 +301,18 @@ nav {
 /* FONT UTILS */
 .text-uppercase {
   text-transform: uppercase;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
 }
 
 

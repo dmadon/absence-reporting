@@ -5,7 +5,7 @@ const sequelize = require('../config/connection');
 
 // THESE ARE THE '/dashboard' ROUTES:
 
-
+// DISPLAY ALL ABSENCES FOR THE LOGGED IN USER
 router.get('/',withAuth,(req,res) => {
     Absence.findAll({
         attributes:['id','start_date','end_date','absence_hours','leave_type_id','status','user_id','created_at','updated_at'],
@@ -32,7 +32,7 @@ router.get('/',withAuth,(req,res) => {
     .then(dbAbsenceData => {
         const absence = dbAbsenceData.map(absence => absence.get({plain:true}));
         const user_id = req.session.user_id;
-        const username = `${req.session.first_name} ${req.session.last_name}`;
+        const username = req.session.username;
         const is_approver = req.session.is_approver;
         res.render('dashboard',{dbAbsenceData,absence, user_id, is_approver, username,loggedIn:true });
     })
@@ -42,50 +42,77 @@ router.get('/',withAuth,(req,res) => {
     });
 });
 
-// router.get('/edit/:id',withAuth,(req,res) => {
-//     Post.findOne({
-//         where:{
-//             id:req.params.id
-//         },
-//         attributes:['id','title','content','created_at','updated_at'],
-//         include:[
-//             {
-//                 model:Comment,
-//                 attributes:['id','comment_text','user_id','post_id','created_at','updated_at'],
-//                 include:{
-//                     model:User,
-//                     attributes:['username']
-//                 }
-//             },
-//             {
-//                 model:User,
-//                 attributes:['username']
-//             }
-//         ]
-//     })
-//     .then(dbPostData => {
-//         if(!dbPostData){
-//             res.status(404).json({message:'Post not found.'});
-//             return;
-//         }
-//         const post = dbPostData.get({plain:true});
 
-//         res.render('edit-post',{post,loggedIn:req.session.loggedIn})
-//     })
-//     .catch(err => {
-//         console.log(err);
-//         res.status(500).json(err);
-//     });
-// });
 
-// // CREATE A ROUTE TO THE NEW POST VIEW
-// router.get('/new-post',(req,res) => {
+// NEW ABSENCE VIEW WHERE USERS CAN CREATE A NEW ABSENCE
+router.get('/new-absence',withAuth, async (req,res) => {
+
+    const leave_options = await
+            Leave.findAll({
+                order:['id']
+            })
+            .then(leaveData => {
+                const types = leaveData.map(type => type.get({plain:true}));
+                return types
+            })
    
-//     res.render('new-post',{
-//         user_id:req.session.user_id,
-//         loggedIn:req.session.loggedIn,
-//         username:req.session.username})
-// });
+    res.render('new-absence',{
+        leave_options,
+        user_id:req.session.user_id,
+        loggedIn:req.session.loggedIn,
+        username:req.session.username})
+});
+
+// EDIT ABSENCE VIEW WHERE USERS CAN EDIT AN EXISTING ABSENCE
+router.get('/edit-absence/:id',withAuth,(req,res) => {
+    Absence.findOne({
+        where:{
+            id:req.params.id
+        },
+        attributes:['id','start_date','end_date','absence_hours','leave_type_id','status','user_id','created_at','updated_at'],
+        include:[
+            {
+                model:Leave
+            },
+            {
+                model:User,
+                include:{
+                    model:User,
+                    as:'approver',
+                    attributes:['id','first_name','last_name','email']
+                }
+            }
+        ]
+    })
+    .then(async dbAbsenceData => {
+        if(!dbAbsenceData){
+            res.status(404).json({message:"No absence was found with that id."});
+            return;
+        }
+
+        const absence = dbAbsenceData.get({plain:true});
+
+        const leave_options = await
+            Leave.findAll({
+                order:['id']
+            })
+            .then(leaveData => {
+                const types = leaveData.map(type => type.get({plain:true}));
+                return types
+            })
+        console.log(leave_options)
+        res.render('edit-absence',{
+            leave_options,
+            absence,
+            user_id:req.session.user_id,
+            loggedIn:req.session.loggedIn,
+            username:req.session.username})
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });    
+});
 
 
 
