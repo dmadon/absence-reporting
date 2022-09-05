@@ -8,11 +8,11 @@
 
 
     <div class="card-header flex-row justify-space-between align-center">
-        <div>
+        <div class="data-item-med">
             <h1>{{user.first_name}} {{user.last_name}}</h1>
         </div>
         <div class="data-item-long">
-            <h1 >{{format_date start_date}} - {{format_date end_date}}</h1>
+            <h1 >{{date_correct start_date}} - {{date_correct end_date}}</h1>
         </div>
         <div class="data-item-med">
             <h1>{{leave.leave_type}}</h1>
@@ -34,4 +34,6 @@
 
 {{/each}}
 
+{{#if absence}}
 <script src="/javascript/absence-approval.js"></script>
+{{/if}}

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {User, Absence, Leave} = require('../../models');
+const {User, Absence, Leave, Department} = require('../../models');
 const withAuth = require('../../utils/auth');
 
 
@@ -15,11 +15,16 @@ router.get('/',withAuth,(req,res) => {
             },
             {
                 model:User,
-                include:{
-                    model:User,
-                    as:'approver',
-                    attributes:['id','first_name','last_name','email']
-                }
+                include:[
+                    {
+                        model:Department
+                    },
+                    {
+                        model:User,
+                        as:'approver',
+                        attributes:['id','first_name','last_name','email']
+                    }
+                ]                
             }
         ]
     })
@@ -42,11 +47,16 @@ router.get('/:id',withAuth,(req,res) => {
             },
             {
                 model:User,
-                include:{
-                    model:User,
-                    as:'approver',
-                    attributes:['id','first_name','last_name','email']
-                }
+                include:[
+                    {
+                        model:Department
+                    },
+                    {
+                        model:User,
+                        as:'approver',
+                        attributes:['id','first_name','last_name','email']
+                    }
+                ]
             }
         ]
     })
@@ -144,11 +154,16 @@ router.put('/approval/:id',withAuth,(req,res) => {
         include:[
             {
                 model:User,
-                include:{
-                    model:User,
-                    as:'approver',
-                    attributes:['id','first_name','last_name','email']
-                }
+                include:[
+                    {
+                        model:Department
+                    },
+                    {
+                        model:User,
+                        as:'approver',
+                        attributes:['id','first_name','last_name','email']
+                    }
+                ]
             }
         ]
     })
@@ -193,11 +208,16 @@ router.put('/denial/:id',withAuth,(req,res) => {
         include:[
             {
                 model:User,
-                include:{
-                    model:User,
-                    as:'approver',
-                    attributes:['id','first_name','last_name','email']
-                }
+                include:[
+                    {
+                        model:Department
+                    },
+                    {
+                        model:User,
+                        as:'approver',
+                        attributes:['id','first_name','last_name','email']
+                    }
+                ]
             }
         ]
     })
