@@ -18,6 +18,7 @@ async function changeAbsenceHandler(event){
     else if(event.target.getAttribute('id')=="edit-btn"){
         document.location.replace(`/dashboard/edit-absence/${id}`)
     }
+
 };
 
 document.querySelector('#absences-holder').addEventListener('click',changeAbsenceHandler);

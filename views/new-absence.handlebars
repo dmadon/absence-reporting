@@ -1,32 +1,47 @@
-<form class="new-absence-form">
-    <div>
-        <label for="new-start-date" class="form-label">Absence Start Date:</label>
-        <input id="new-start-date" type="date" value="{{absence.start_date}}">
-    </div>
-    <div>
-        <label for="new-end-date" class="form-label">Absence End Date:</label>
-        <input id="new-end-date" type="date" value="{{absence.end_date}}">
+<div class="flex-row justify-center">
+
+    <div class="form-container">
+        <form class="form new-absence-form">
+
+
+            
+            <div class="flex-row justify-center">
+                <div class="form-item width-50">
+                    <label for="new-start-date" class="form-label">Absence Start Date:</label>
+                    <input id="new-start-date" class="form-input" type="date" >
+                </div>
+                <div class="form-item width-50">
+                    <label for="new-end-date" class="form-label">Absence End Date:</label>
+                    <input id="new-end-date"  class="form-input" type="date" >
+                </div>
+            </div>
+
+
+            <div class="flex-row justify-center">
+                <div class="form-item width-50">
+                    <label for="new-leave" class="form-label">Select Leave Type:</label>
+                    <select id="new-leave" class="form-input">
+                        <option value="">----please select a leave type----</option>
+                        {{#each leave_options}}
+                        <option value="{{id}}">{{leave_type}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-item width-50">
+                    <label for="new-hours" class="form-label">Enter Absence Hours:</label>
+                    <input id="new-hours"  class="form-input" type="number" step=".01" value="{{absence.absence_hours}}">
+                </div>
+            </div>
+
+                <div class="flex-row justify-space-around">
+                    <button type="submit" id="save-new-btn" class="btn"><i class="uil uil-save"></i> Save Absence</button>
+                    <a href="/dashboard" id="cancel" class="btn text-center"><i class="uil uil-sign-out-alt"></i> Cancel</a>
+                </div>
+            
+        </form>
+
     </div>
 
-    <div>
-        <label for="new-leave" class="form-label">Select Leave Type:</label>
-        <select id="new-leave">
-            <option value="">----please select a leave type----</option>
-            {{#each leave_options}}
-            <option value="{{id}}">{{leave_type}}</option>
-            {{/each}}
-        </select>
-    </div>
-
-    <div>
-        <label for="new-hours" class="form-label">Enter Absence Hours:</label>
-        <input id="new-hours" type="number" step=".01" value="{{absence.absence_hours}}">
-    </div>
-
-    <div class="flex-row justify-space-around">
-        <button type="submit" id="save-new-btn" class="btn">Save Absence</button>
-        <a href="/dashboard" id="cancel" class="btn text-center">Cancel</a>
-    </div>
-</form>
+</div>
 
 <script src="/javascript/save-new-absence.js"></script>

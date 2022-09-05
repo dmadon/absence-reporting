@@ -60,7 +60,8 @@ router.get('/new-absence',withAuth, async (req,res) => {
         leave_options,
         user_id:req.session.user_id,
         loggedIn:req.session.loggedIn,
-        username:req.session.username})
+        username:req.session.username,
+        is_approver:req.session.is_approver})
 });
 
 // EDIT ABSENCE VIEW WHERE USERS CAN EDIT AN EXISTING ABSENCE
@@ -101,12 +102,15 @@ router.get('/edit-absence/:id',withAuth,(req,res) => {
                 return types
             })
         console.log(leave_options)
+        console.log(absence.start_date)
+        console.log(absence.end_date)
         res.render('edit-absence',{
             leave_options,
             absence,
             user_id:req.session.user_id,
             loggedIn:req.session.loggedIn,
-            username:req.session.username})
+            username:req.session.username,
+            is_approver:req.session.is_approver})
     })
     .catch(err => {
         console.log(err);
