@@ -8,6 +8,9 @@ router.get('/', async (req,res) => {
 
     const approver_options = await
         User.findAll({
+            where:{
+                is_approver:true
+            },
             order:['last_name']
         })
         .then(approverData => {
