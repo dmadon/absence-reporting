@@ -9,18 +9,29 @@ router.get('/',(req,res) => {
         attributes:{exclude:['password']},
         include:[
             {
+                model:Department
+            },
+            {
                 model:User,
                 as:'approver',
-                attributes:['id','first_name','last_name']
+                attributes:['id','first_name','last_name'],
+                include:{
+                    model:Department
+                }
             },
             {
                 model:User,
                 as:'employees',
                 attributes:['id','first_name','last_name'],
-                include:{
-                    model:Absence,
-                    attributes:['id','start_date','end_date','absence_hours','leave_type_id','status','created_at','updated_at'],
-                }
+                include:[
+                    {
+                        model:Department
+                    },
+                    {
+                        model:Absence,
+                        attributes:['id','start_date','end_date','absence_hours','leave_type_id','status','created_at','updated_at'],
+                    }                    
+                ]
             }
         ]
     })
@@ -77,6 +88,7 @@ router.post('/',(req,res) => {
        first_name: req.body.first_name,
        last_name:req.body.last_name,
        is_approver:req.body.is_approver,
+       is_admin:req.body.is_admin,
        department_id:req.body.department_id,
        approver_id:req.body.approver_id,
        email:req.body.email,
@@ -85,9 +97,11 @@ router.post('/',(req,res) => {
     .then(dbUserData => {
         req.session.save(() => {
             req.session.user_id = dbUserData.id;
+            req.session.username = `${dbUserData.first_name} ${dbUserData.last_name}`;
             req.session.first_name = dbUserData.first_name;
             req.session.last_name = dbUserData.last_name;
             req.session.is_approver = dbUserData.is_approver;
+            req.session.is_admin = dbUserData.is_admin;
             req.session.loggedIn = true;
 
             res.json(dbUserData);
@@ -148,6 +162,7 @@ router.post('/login',(req,res) => {
                 req.session.last_name = dbUserData.last_name;
                 req.session.username = `${dbUserData.first_name} ${dbUserData.last_name}`;
                 req.session.is_approver = dbUserData.is_approver;
+                req.session.is_admin = dbUserData.is_admin;
                 req.session.loggedIn = true;
 
                 res.json({user:dbUserData,message:'You are logged in!'});

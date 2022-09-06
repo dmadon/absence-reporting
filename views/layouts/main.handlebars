@@ -5,28 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CMD Financial, Inc. Employee Absence Reporting</title>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
 
     
-        <header class="hero flex-row justify-space-between">
-        
-                <nav class="flex-row align-center">
+        <header class="hero flex-row justify-space-between align-bottom">
+                <h1 class="app-title">Employee Absence Reporting</h1>
+
+                <nav class="flex-row align-center justify-space-around">
                     {{#if is_approver}}
-                       <a href='/approval-queue' id="approval-queue" class="nav-item btn-no-style"><h3>Approval Queue</h3></a>
+                       <a href='/approval-queue' id="approval-queue" class="nav-item btn-no-style"></i><h3><i class="uil uil-clipboard-notes"></i> Approval Queue</h3></a>
                     {{/if}}
                     {{#if loggedIn}}
-                        <a href='/dashboard' id="dashboard" class="nav-item btn-no-style"><h3>Dashboard</h3></a>
-                        <button id="logout" class="btn-no-style nav-item"><h3>Log Out</h3></button>
+                        <a href='/dashboard' id="dashboard" class="nav-item btn-no-style"><h3><i class="uil uil-dashboard"></i> Dashboard</h3></a>
+                        <button id="logout" class="btn-no-style nav-item"><h3><i class="uil uil-signout"></i> Log Out</h3></button>
                     {{/if}}
-                   
-
                 </nav>
-                <h1>
-                    <a class="app-title" href="/">Employee Absence Reporting</a>
-                </h1>
+                
 
         </header>
     </div>
@@ -34,7 +32,7 @@
             {{{body}}}
         </main>
         <footer>
-            CMD Financial, Inc.
+            <h3>CMD Financial, Inc.</h3>
         </footer>
     </div>
 

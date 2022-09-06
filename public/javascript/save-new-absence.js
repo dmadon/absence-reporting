@@ -6,21 +6,26 @@ async function saveNewAbsence(event){
     const leave_type_id = document.querySelector('#new-leave').value.trim();
     const absence_hours = document.querySelector('#new-hours').value.trim();
 
-    const response = await fetch('/api/absences',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-            start_date,
-            end_date,
-            leave_type_id,
-            absence_hours
-        })
-    })
-    if(response.ok){
-        document.location.replace('/dashboard');
+    if(!start_date||!end_date||!leave_type_id||!absence_hours){
+        alert('Please complete all form fields');
     }
     else{
-        alert(response.statusText)
+        const response = await fetch('/api/absences',{
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({
+                start_date,
+                end_date,
+                leave_type_id,
+                absence_hours
+            })
+        })
+        if(response.ok){
+            document.location.replace('/dashboard');
+        }
+        else{
+            alert(response.statusText)
+        };
     };
 };
 

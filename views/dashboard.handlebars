@@ -1,39 +1,44 @@
-<div class="flex-row justify-space-between align-center">
-    <h1>Dashboard: {{username}}</h1>
-    <button class="save-btn btn" id="new-absence-btn">Create New Absence</button>
+<div class="flex-row justify-space-between justify-center">
+    <h1 class="page-title">Dashboard: {{username}}</h1>
+    <button class="btn green-text" id="new-absence-btn"><i class="uil uil-plus-circle"></i> Create New Absence</button>
 </div>
 
-{{#each absence}}
-<article class="card">
+<div id="absences-holder">
+
+    {{#each absence}}
+    <article class="card">
 
 
-    <div class="card-header flex-row justify-space-between align-center">
-        <div>
-            <h1>{{format_date start_date}} - {{format_date end_date}}</h1>
-            <h4>Created {{format_date created_at}}, last updated {{ format_date updated_at}}</h4>
-            </a>
+        <div class="card-header absence-item flex-row justify-space-between align-center">
+            <div>
+                <h1>{{date_correct start_date}} - {{date_correct end_date}}</h1>
+                {{!-- <h4>Created {{format_date created_at}}, last updated {{format_date updated_at}}</h4> --}}
+            </div>
+            <div class="data-item-med">
+                <h1>{{leave.leave_type}}</h1>
+            </div>
+            <div class="data-item-med">
+                <h1>{{absence_hours}} hours</h1>
+            </div>
+            <div class="data-item-med">
+                <h1>{{status}}</h1>
+            </div class="data-item-med">
+            
+            <button id="delete-btn" class="btn red-text" data-record="{{id}}"><i class="uil uil-trash-alt"></i> Delete Absence</button>
+            <button id="edit-btn" class="btn blue-text" data-record="{{id}}"><i class="uil uil-pen"></i> Edit Absence</button>
         </div>
-        <div class="data-item-med">
-            <h1>{{leave.leave_type}}</h1>
-        </div>
-        <div class="data-item-med">
-            <h1>{{absence_hours}} hours</h1>
-        </div>
-        <div class="data-item-med">
-            <h1>{{status}}</h1>
-        </div class="data-item-med">
-        
-        <button id="delete-btn" class="btn" data-record="{{id}}">Delete Absence</button>
-        <a class="btn" href="/dashboard/edit-absence/{{id}}"><h3 class="text-center">Edit Absence</h3></a>
-    </div>
 
 
-</article>
+    </article>
 
 
-{{/each}}
+    {{/each}}
+
+</div>
+
+
 
 {{#if absence}}
-<script src="/javascript/delete-absence.js"></script>
+<script src="/javascript/change-absence.js"></script>
 {{/if}}
 <script src="/javascript/new-absence.js"></script>

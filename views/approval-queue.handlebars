@@ -1,5 +1,5 @@
-<div class="flex-row justify-space-between align-center">
-    <h1>Approval Queue: {{username}}</h1>
+<div class="flex-row justify-center">
+    <h1 class="page-title">Approval Queue: {{username}}</h1>
  
 </div>
 
@@ -7,12 +7,12 @@
 <article class="card">
 
 
-    <div class="card-header flex-row justify-space-between align-center">
-        <div>
+    <div class="card-header approval-item flex-row justify-space-between align-center">
+        <div class="data-item-med">
             <h1>{{user.first_name}} {{user.last_name}}</h1>
         </div>
         <div class="data-item-long">
-            <h1 >{{format_date start_date}} - {{format_date end_date}}</h1>
+            <h1 >{{date_correct start_date}} - {{date_correct end_date}}</h1>
         </div>
         <div class="data-item-med">
             <h1>{{leave.leave_type}}</h1>
@@ -20,10 +20,10 @@
         <div class="data-item-med">
             <h1>{{absence_hours}} hours</h1>
         </div>
-        <div class="data-item-med">
-            <button id="approve-btn" class="btn" data-record="{{id}}">Approve</button>
-            <button id="deny-btn" class="btn" data-record="{{id}}">Deny</button>
-        </div>
+
+            <button id="approve-btn" class="btn green-text" data-record="{{id}}"><i class="uil uil-check-circle"></i> Approve</button>
+            <button id="deny-btn" class="btn red-text" data-record="{{id}}"><i class="uil uil-times-circle"></i></i> Deny</button>
+   
         
         
     </div>
@@ -34,4 +34,6 @@
 
 {{/each}}
 
+{{#if absence}}
 <script src="/javascript/absence-approval.js"></script>
+{{/if}}
