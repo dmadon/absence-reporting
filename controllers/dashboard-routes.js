@@ -6,7 +6,7 @@ const {User, Absence, Leave} = require('../models');
 // THESE ARE THE '/dashboard' ROUTES:
 
 // DISPLAY ALL ABSENCES FOR THE LOGGED IN USER
-router.get('/',(req,res) => {
+router.get('/',withAuth,(req,res) => {
     Absence.findAll({
         attributes:['id','start_date','end_date','absence_hours','leave_type_id','status','user_id','created_at','updated_at'],
         where:{
@@ -117,19 +117,5 @@ router.get('/edit-absence/:id',withAuth,(req,res) => {
         res.status(500).json(err);
     });    
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = router;
