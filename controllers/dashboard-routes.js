@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const withAuth = require('../utils/auth');
 const {User, Absence, Leave} = require('../models');
-const sequelize = require('../config/connection');
+
 
 // THESE ARE THE '/dashboard' ROUTES:
 
 // DISPLAY ALL ABSENCES FOR THE LOGGED IN USER
-router.get('/',withAuth,(req,res) => {
+router.get('/',(req,res) => {
     Absence.findAll({
         attributes:['id','start_date','end_date','absence_hours','leave_type_id','status','user_id','created_at','updated_at'],
         where:{

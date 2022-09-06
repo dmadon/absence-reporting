@@ -1,6 +1,5 @@
 const router = require('express').Router();
-const sequelize = require('../config/connection');
-const {User, Absence} = require('../models');
+const {User} = require('../models');
 
 // THESE ARE THE '/' ROUTES:
 
