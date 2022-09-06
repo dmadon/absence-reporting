@@ -12,9 +12,9 @@
 
 
         <div class="card-header absence-item flex-row justify-space-between align-center">
-            <div>
+            <div> 
+                {{!-- note: when running application on the local machine, replace 'format_date' with 'date_correct' to display the correct dates on the page. --}}
                 <h1>{{format_date start_date}} - {{format_date end_date}}</h1>
-                {{!-- <h4>Created {{format_date created_at}}, last updated {{format_date updated_at}}</h4> --}}
             </div>
             <div class="data-item-med">
                 <h1>{{leave.leave_type}}</h1>
