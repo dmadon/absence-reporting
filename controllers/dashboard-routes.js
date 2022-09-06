@@ -34,7 +34,8 @@ router.get('/',withAuth,(req,res) => {
         const user_id = req.session.user_id;
         const username = req.session.username;
         const is_approver = req.session.is_approver;
-        res.render('dashboard',{dbAbsenceData,absence, user_id, is_approver, username,loggedIn:true });
+        const loggedIn = req.session.loggedIn;
+        res.render('dashboard',{dbAbsenceData,absence, user_id, username, is_approver, loggedIn});
     })
     .catch(err => {
         console.log(err);

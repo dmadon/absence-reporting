@@ -29,14 +29,21 @@ async function signupFormHandler(event){
     var approver = ''
 
     if(document.querySelector('#is-approver-signup').value.trim()==0){
-        approver = null
+        approver = false
     }
     else{approver = document.querySelector('#is-approver-signup').value.trim()}
 
+    var myApprover = ''
+
+    if(document.querySelector('#my-approver-signup').value.trim()==0){
+        myApprover = null
+    }
+    else{myApprover = document.querySelector('#my-approver-signup').value.trim()}
+
     const first_name = document.querySelector('#first_name-signup').value.trim();
     const last_name = document.querySelector('#last_name-signup').value.trim();
-    const is_approver = document.querySelector('#is-approver-signup').value.trim();
-    const approver_id = approver;
+    const is_approver = approver;
+    const approver_id = myApprover;
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
 
