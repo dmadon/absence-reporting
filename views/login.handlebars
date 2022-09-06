@@ -1,7 +1,7 @@
    
 <div class="flex-row justify-center">
     <div class="card login-signup">
-        <div class="card-header"><h3>Log In</h3></div>
+        <div class="card-header form-item"><h3>Log In</h3></div>
             <div class="card-body flex-column align-center">
                 <form class="login-form">
                     <div class="form-item">
@@ -31,6 +31,23 @@
                         <input type="text" id="last_name-signup" class="form-input"/>
                     </div>
                     <div class="form-item">
+                        <label for="is-approver-signup" class="form-label">are you an absence approver?:</label>
+                        <select id="is-approver-signup" class="form-input">
+                            <option value="">----choose one----</option>
+                            <option value="0">no</option>
+                            <option value="1">yes</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                    <label for="my-approver-signup" class="form-label">select your approver:</label>
+                    <select id="my-approver-signup" class="form-input">
+                        <option value="">----please select your approver----</option>
+                        {{#each approver_options}}
+                        <option value="{{id}}">{{last_name}}, {{first_name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                    <div class="form-item">
                         <label for="email-signup" class="form-label">email:</label>
                         <input type="text" id="email-signup" class="form-input"/>
                     </div>
@@ -39,7 +56,7 @@
                         <input type="password" id="password-signup" class="form-input"/>
                     </div>
                  
-                        <button type="submit" class="btn width-100">Sign Up</button>
+                        <button type="submit" class="btn width-100">Create Profile</button>
                   
                 </form>
             </div>
