@@ -26,15 +26,22 @@ async function loginFormHandler(event){
 async function signupFormHandler(event){
     event.preventDefault();
 
+    var approver = ''
+
+    if(document.querySelector('#is-approver-signup').value.trim()==0){
+        approver = null
+    }
+    else{approver = document.querySelector('#is-approver-signup').value.trim()}
+
     const first_name = document.querySelector('#first_name-signup').value.trim();
     const last_name = document.querySelector('#last_name-signup').value.trim();
     const is_approver = document.querySelector('#is-approver-signup').value.trim();
-    const approver_id = document.querySelector('#my-approver-signup').value.trim();
+    const approver_id = approver;
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
 
 
-    if(first_name && last_name && approver_id && email && password){
+    if(first_name && last_name && email && password){
         const response = await fetch('/api/users/',{
             method:'POST',
             body: JSON.stringify({
