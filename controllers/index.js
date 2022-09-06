@@ -2,10 +2,12 @@ const router = require('express').Router();
 const apiRoutes = require('./api');
 const homeRoutes = require('./home-routes');
 const dashboardRoutes = require('./dashboard-routes');
+const approvalQueueRoutes = require('./approval-queue-routes');
 
-// router.use('/dashboard',dashboardRoutes);
+router.use('/approval-queue',approvalQueueRoutes);
+router.use('/dashboard',dashboardRoutes);
 router.use('/api',apiRoutes);
-// router.use('/',homeRoutes);
+router.use('/',homeRoutes);
 
 // This is so that if we make a request to any endpoint that doesn't exist,
 // we will receive a 404 error indicating we have requested an incorrect resource:

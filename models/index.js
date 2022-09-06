@@ -1,6 +1,7 @@
 const User = require('./User');
 const Department = require('./Department');
 const Absence = require('./Absence');
+const Leave = require('./Leave');
 
 
 Department.hasMany(User,{
@@ -24,15 +25,15 @@ Absence.belongsTo(User,{
     onDelete:'CASCADE'
 });
 
-// Leave.hasMany(Absence,{
-//     foreignKey:'leave_type_id'
-// });
+Leave.hasMany(Absence,{
+    foreignKey:'leave_type_id'
+});
 
-// Absence.belongsTo(Leave,{
-//     foreignKey:'leave_type_id',
-//     onDelete:'SET NULL'
-// })
+Absence.belongsTo(Leave,{
+    foreignKey:'leave_type_id',
+    onDelete:'SET NULL'
+})
 
 
 
-module.exports = {User, Department, Absence}; 
+module.exports = {User, Department, Absence, Leave}; 

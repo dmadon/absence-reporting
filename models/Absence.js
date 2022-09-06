@@ -2,7 +2,16 @@ const {Model,DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
 
 
-class Absence extends Model{}
+class Absence extends Model{
+    checkApproverId(currentUserId,absenceApproverId){
+        if(currentUserId == absenceApproverId){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
 
 Absence.init(
     {
@@ -36,16 +45,16 @@ Absence.init(
         leave_type_id:{
             type:DataTypes.INTEGER,
             allowNull:true,
-            // references:{
-            //     model:'leave',
-            //     key:'id'
-            // },
+            references:{
+                model:'leave',
+                key:'id'
+            },
         },
         status:{
             type:DataTypes.ENUM,
             allowNull:false,
-            values:['pending','approved','denied'],
-            defaultValue:'pending'
+            values:['Pending','Approved','Denied'],
+            defaultValue:'Pending'
         },
         user_id:{
             type:DataTypes.INTEGER,
