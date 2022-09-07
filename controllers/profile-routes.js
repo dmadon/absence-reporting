@@ -1,13 +1,13 @@
 const router = require('express').Router();
 const {User, Department, Absence} = require('../models');
+const withAuth = require('../utils/auth');
 
 
 
-
-router.get('/:id', (req,res) => {
+router.get('/', withAuth,(req,res) => {
     User.findOne({
         where:{
-            id:req.params.id
+            id:req.session.user_id
         },
         attributes:{exclude:['password']},
         include:[
@@ -46,3 +46,5 @@ router.get('/:id', (req,res) => {
         res.status(500).json(err);
     });
 });
+
+module.exports = router;

@@ -51,6 +51,9 @@ router.get('/:id',(req,res) => {
         attributes:{exclude:['password']},
         include:[
             {
+            model:Department
+            },
+            {
                 model:User,
                 as:'approver',
                 attributes:['id','first_name','last_name']
