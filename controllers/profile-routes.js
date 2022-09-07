@@ -3,6 +3,7 @@ const {User, Department, Absence} = require('../models');
 
 
 
+
 router.get('/:id', (req,res) => {
     User.findOne({
         where:{

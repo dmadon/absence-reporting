@@ -15,6 +15,15 @@ module.exports = {
 
         var month = ''
 
+
+        if(new Date(value).getMonth()<9){
+            month = `0${new Date(value).getMonth()+1}`
+        }
+        else{
+            month = `${new Date(value).getMonth()+1}`
+        };
+
+
         if(new Date(value).getMonth()<10){
             month = `0${new Date(value).getMonth()+1}`
         }
