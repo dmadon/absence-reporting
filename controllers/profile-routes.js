@@ -31,10 +31,15 @@ router.get('/', withAuth,(req,res) => {
                 attributes:['id','first_name','last_name',
                     [sequelize.literal(`(SELECT COUNT(*) FROM absence WHERE absence.user_id = employees.id)`),'total_absences'],
                     [sequelize.literal(`(SELECT COUNT(*) FROM absence WHERE absence.user_id = employees.id AND absence.end_date > CURRENT_DATE AND absence.status = 'Approved')`),'upcoming_absences']],
-                include:{
+                include:[
+                    {
                     model:Absence,
                     attributes:['id','start_date','end_date','absence_hours','leave_type_id','status','created_at','updated_at'],
-                }
+                    },
+                    {model:Department,
+                    attributes:['id','name']
+                    }
+                ]
             }
         ],
         order:[['employees','last_name','ASC']]
