@@ -17,7 +17,8 @@ router.get('/', withAuth,(req,res) => {
         attributes:{exclude:['password']},
         include:[
             {
-                model:Department
+                model:Department,
+                attributes:['id','name']
             },
             {
                 model:User,
