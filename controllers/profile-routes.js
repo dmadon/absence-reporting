@@ -11,6 +11,9 @@ router.get('/:id', (req,res) => {
         attributes:{exclude:['password']},
         include:[
             {
+                model:Department
+            },
+            {
                 model:User,
                 as:'approver',
                 attributes:['id', 'first_name', 'last_name']
@@ -32,15 +35,13 @@ router.get('/:id', (req,res) => {
             return;
         }
         else{
-            res.render(dbUserData)
+            res.render('profile', {
+                dbUserData
+            })
         }
     })
-
-
-
-
-
-
-
-
-})
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
