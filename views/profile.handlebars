@@ -1,42 +1,60 @@
-<div class="flex-row justify-center">
-    <div class="card login-signup">
-        <div class="card-header form-item"><h3>My Profile</h3></div>
-            <div class="card-body flex-column align-center">
-                <form class="login-form">
-                    <div class="form-item">
-                        <label for="my-first-name" class="form-label">first name:</label>
-                        <input type="text" id="my-first-name" class="form-input" value="{{first_name}}"/>
-                    </div>
-                    <div class="form-item">
-                        <label for="my-last-name" class="form-label">last name:</label>
-                        <input type="text" id="my-first-name" class="form-input" value="{{last_name}}"/>
-                    </div>
-                    <div class="form-item">
-                        <label for="my-email" class="form-label">email:</label>
-                        <input type="email" id="my-email" class="form-input" value="{{email}}"/>
-                    </div>
-                    <div class="form-item">
-                        <label for="my-password" class="form-label">password:</label>
-                        <input type="password" id="my-password" class="form-input" value="{{password}}"/>
-                    </div>
-                    <div class="form-item">
-                        <label for="is-approver" class="form-label">approver status:</label>
-                        <input disabled type="text" id="is-approver" class="form-input" value="{{is_approver}}"/>
-                    </div>
-                    <div class="form-item">
-                        <label for="my-department" class="form-label">department:</label>
-                        <input disabled type="text" id="my-department" class="form-input" value="{{department.name}}"/>
-                    </div>
-                    <div class="form-item">
-                        <label for="my-approver" class="form-label">my absence approver:</label>
-                        <input disabled type="text" id="my-approver" class="form-input" value="{{approver.first_name}} {{approver.last_name}}"/>
-                    </div>
-
-          
-                    <button type="submit" class="btn width-50">Update</button>
-              
-                </form>
+<div class="flex-column align-center">
+    <div class="card width-75">
+        <div class="card-header"><h1>My Profile</h1></div>
+            <div class="card-body ">
+             
+            <div class="flex-row justify-space-around">
+                <div>
+                    <h1>First Name: {{profile.first_name}}</h1>
+                    <h1>Last Name: {{profile.last_name}}</h1>
+                    <h1>Email: {{profile.email}}</h1>
+                </div>
+                <div>
+                    <h1>Department: {{profile.department.name}}</h1>
+                    <h1>Approver Status: {{is_approver}}</h1>
+                    <h1>My Approver: {{profile.approver.first_name}} {{profile.approver.last_name}}</h1>
+                </div>        
             </div>
-    </div>{{!--end card--}}
+        </div>
+    </div> {{!--end card--}}
+
+    <div class="card width-75">
+        <div class="card-header"><h1>My Employees</h1></div>
+            <div class="card-body ">
+                <div class="flex-column">
+               
+                        {{#each employees}}
+                        <div class="flex-row">
+                            <h1 >{{last_name}}, {{first_name}}</h1>
+
+                            
+                            <h1 >{{department.name}}</h1>
+                        </div>
+                        {{/each}}
+                  
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
 
 {{!-- <script src="/javascript/update-profile.js"></script> --}}

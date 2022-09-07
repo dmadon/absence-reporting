@@ -273,7 +273,7 @@ nav {
 }
 
 
-.card-header h1, .card-header h3, .card-header h4, .hero h1,h2,h3,h4{
+.card-header , .card-header h3, .card-header h4, .hero h1,h2,h3,h4{
   color: var(--primary);
 
 }

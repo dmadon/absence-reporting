@@ -2,8 +2,6 @@ const router = require('express').Router();
 const {User, Department, Absence} = require('../models');
 const withAuth = require('../utils/auth');
 
-
-
 router.get('/', withAuth,(req,res) => {
     User.findOne({
         where:{
@@ -23,23 +21,24 @@ router.get('/', withAuth,(req,res) => {
                 model:User,
                 as:'employees',
                 attributes:['id','first_name','last_name'],
+                order:['last_name'],
                 include:{
                     model:Absence,
                     attributes:['id','start_date','end_date','absence_hours','leave_type_id','status','created_at','updated_at'],
                 }
+                
             }
         ]
     })
     .then(dbUserData => {
-        if(!dbUserData){
-            res.status(404).json({message: 'No user found with given id'});
-            return;
-        }
-        else{
-            res.render('profile', {
-                dbUserData
-            })
-        }
+        const profile = dbUserData.get({plain:true});
+        const employees = dbUserData.employees.map(employee => employee.get({plain:true}))
+        const user_id = req.session.user_id;
+        const username = req.session.username;
+        const is_approver = req.session.is_approver;
+        const loggedIn = req.session.loggedIn;
+        res.render('profile', {profile,employees,user_id,username,is_approver,loggedIn})     
+        // res.json(employees)
     })
     .catch(err => {
         console.log(err);
