@@ -21,8 +21,7 @@ async function saveNewAbsence(event){
             })
         })
         if(response.ok){
-            alert('response is ok')
-            // document.location.replace('/dashboard');
+            document.location.replace('/dashboard');
         }
         else{
             alert(response.statusText)
