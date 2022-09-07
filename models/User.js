@@ -31,6 +31,10 @@ User.init(
             type: DataTypes.BOOLEAN,
             allowNull: false
         },
+        is_admin:{
+            type:DataTypes.BOOLEAN,
+            allowNull:false
+        },
         department_id:{
             type:DataTypes.INTEGER,
             allowNull:true,
@@ -60,7 +64,8 @@ User.init(
             allowNull:false,
             validate:{
                 len:[4]
-            }
+            },
+            defaultValue:'admin'
         }
     },
     {

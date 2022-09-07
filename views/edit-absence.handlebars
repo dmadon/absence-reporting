@@ -1,0 +1,47 @@
+<div class="flex-row justify-center">
+
+    <div class="form-container">
+        <form class="form edit-absence-form">
+
+
+            
+            <div class="flex-row justify-center">
+                <div class="form-item width-50">
+                    <label for="edit-start-date" class="form-label">Edit Start Date:</label>
+                    <input id="edit-start-date" class="form-input" type="date" value="{{date_input_format absence.start_date}}">
+                </div>
+                <div class="form-item width-50">
+                    <label for="edit-end-date" class="form-label">Edit End Date:</label>
+                    <input id="edit-end-date"  class="form-input" type="date" value="{{date_input_format absence.end_date}}">
+                </div>
+            </div>
+
+
+            <div class="flex-row justify-center">
+                <div class="form-item width-50">
+                    <label for="edit-leave" class="form-label">Edit Leave Type:</label>
+                    <select id="edit-leave" class="form-input">
+                        <option value="">----please select a leave type----</option>
+                        {{#each leave_options}}
+                        <option value="{{id}}">{{leave_type}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-item width-50">
+                    <label for="edit-hours" class="form-label">Edit Absence Hours:</label>
+                    <input id="edit-hours"  class="form-input"type="number" step=".01" value="{{absence.absence_hours}}">
+                </div>
+            </div>
+
+                <div class="flex-row justify-space-around">
+                    <button type="submit" id="save-changes-btn" class="btn"><i class="uil uil-save"></i> Save Changes</button>
+                    <a href="/dashboard" id="cancel" class="btn text-center"><i class="uil uil-sign-out-alt"></i> Cancel</a>
+                </div>
+            
+        </form>
+
+    </div>
+
+</div>
+
+<script src="/javascript/edit-absence.js"></script>
