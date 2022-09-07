@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const withAuth = require('../utils/auth');
 const {User, Absence, Leave} = require('../models');
-const sequelize = require('../config/connection');
+
 
 // THESE ARE THE '/dashboard' ROUTES:
 
@@ -34,7 +34,8 @@ router.get('/',withAuth,(req,res) => {
         const user_id = req.session.user_id;
         const username = req.session.username;
         const is_approver = req.session.is_approver;
-        res.render('dashboard',{dbAbsenceData,absence, user_id, is_approver, username,loggedIn:true });
+        const loggedIn = req.session.loggedIn;
+        res.render('dashboard',{dbAbsenceData,absence, user_id, username, is_approver, loggedIn});
     })
     .catch(err => {
         console.log(err);
@@ -101,9 +102,7 @@ router.get('/edit-absence/:id',withAuth,(req,res) => {
                 const types = leaveData.map(type => type.get({plain:true}));
                 return types
             })
-        console.log(leave_options)
-        console.log(absence.start_date)
-        console.log(absence.end_date)
+
         res.render('edit-absence',{
             leave_options,
             absence,
@@ -117,19 +116,5 @@ router.get('/edit-absence/:id',withAuth,(req,res) => {
         res.status(500).json(err);
     });    
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = router;

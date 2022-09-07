@@ -58,7 +58,7 @@ p {
   display: block;
   margin: 20px 0;
   border-radius: var(--border-radius);
-  color: var(--primary);
+  color: var(--dark);
   border: none;
   outline: none;
   background-color: var(--grey);
@@ -68,7 +68,11 @@ p {
 
 .comment-form .btn, .edit-absence-form .btn, .new-absence-form .btn, #new-absence-btn {
   width: 25%;
-  ;
+}
+
+#new-absence-btn{
+  margin-bottom: 2%;
+  padding: 1% 0;
 }
 
 .card .btn{
@@ -249,11 +253,15 @@ nav {
 }
 
 .card-header {
-  /* color: var(--dark) !important; */
+  color: var(--dark);
   background-color: var(--primary);
   padding: 0 2.5%;
   border-radius: calc(.18rem - 1px) calc(.18rem - 1px) 0 0;
-  
+}
+
+.login-signup .card-header h3{
+  color:var(--dark);
+  padding: 1% 0;
 }
 
 .approval-item{
