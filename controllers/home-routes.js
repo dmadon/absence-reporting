@@ -1,11 +1,25 @@
 const router = require('express').Router();
-const sequelize = require('../config/connection');
-const {User, Absence} = require('../models');
+const {User} = require('../models');
 
 // THESE ARE THE '/' ROUTES:
 
-router.get('/', (req,res) => {
-    res.render('login');
+router.get('/', async (req,res) => {
+
+    const approver_options = await
+        User.findAll({
+            where:{
+                is_approver:true
+            },
+            order:['last_name']
+        })
+        .then(approverData => {
+            const approvers = approverData.map(approver => approver.get({plain:true}));
+            return approvers;
+        })
+
+    res.render('login',{
+        approver_options
+    });
 });
 
 

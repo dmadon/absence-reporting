@@ -1,41 +1,45 @@
-async function approveAbsence(event){
+async function queueHandler(event){
     
     event.preventDefault();
 
     const id = event.target.getAttribute("data-record");
 
-    const response = await fetch (`/api/absences/approval/${id}`, {
-        method:'PUT',
-        headers:{'Content-Type':'application/json'}
-    })
-    if (response.ok){
-        document.location.reload();
+    if(event.target.getAttribute('id')=="approve-btn"){
+        const response = await fetch (`/api/absences/approval/${id}`, {
+            method:'PUT',
+            headers:{'Content-Type':'application/json'}
+        })
+        if (response.ok){
+            document.location.reload();
+        }
+        else{
+            alert(response.statusText);
+        };
     }
-    else{
-        alert(response.statusText);
-    };
+    else if(event.target.getAttribute('id')=="deny-btn"){
+        const response = await fetch (`/api/absences/denial/${id}`, {
+            method:'PUT',
+            headers:{'Content-Type':'application/json'}
+        })
+        if (response.ok){
+            document.location.reload();
+        }
+        else{
+            alert(response.statusText);
+        };
+    }  
 };
 
-async function denyAbsence(event){
+// async function denyAbsence(event){
     
-    event.preventDefault();
+//     event.preventDefault();
 
-    id = event.target.getAttribute("data-record");
+//     id = event.target.getAttribute("data-record");
 
-    const response = await fetch (`/api/absences/denial/${id}`, {
-        method:'PUT',
-        headers:{'Content-Type':'application/json'}
-    })
-    if (response.ok){
-        document.location.reload();
-    }
-    else{
-        alert(response.statusText);
-    };
-};
+    
+// };
 
 
 
 
-document.querySelector('#approve-btn').addEventListener('click',approveAbsence);
-document.querySelector('#deny-btn').addEventListener('click',denyAbsence);
+document.querySelector('#queue-holder').addEventListener('click',queueHandler);

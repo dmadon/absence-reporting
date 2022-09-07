@@ -29,11 +29,13 @@ User.init(
         },
         is_approver:{
             type: DataTypes.BOOLEAN,
-            allowNull: false
+            allowNull: false,
+            defaultValue:false
         },
         is_admin:{
             type:DataTypes.BOOLEAN,
-            allowNull:false
+            allowNull:false,
+            defaultValue:false
         },
         department_id:{
             type:DataTypes.INTEGER,

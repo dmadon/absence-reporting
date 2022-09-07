@@ -3,36 +3,33 @@
  
 </div>
 
-{{#each absence}}
-<article class="card">
+<div id="queue-holder">
 
+    {{#each absence}}
+    <article class="card">
 
-    <div class="card-header approval-item flex-row justify-space-between align-center">
-        <div class="data-item-med">
-            <h1>{{user.first_name}} {{user.last_name}}</h1>
-        </div>
-        <div class="data-item-long">
-            <h1 >{{date_correct start_date}} - {{date_correct end_date}}</h1>
-        </div>
-        <div class="data-item-med">
-            <h1>{{leave.leave_type}}</h1>
-        </div>
-        <div class="data-item-med">
-            <h1>{{absence_hours}} hours</h1>
-        </div>
+        <div class="card-header approval-item flex-row justify-space-between align-center">
+            <div class="data-item-med">
+                <h1>{{user.first_name}} {{user.last_name}}</h1>
+            </div>
+            <div class="data-item-long">
+                {{!-- note: when running application on the local machine, replace 'format_date' with 'date_correct' to display the correct dates on the page. --}}
+                <h1 >{{format_date start_date}} - {{format_date end_date}}</h1>
+            </div>
+            <div class="data-item-med">
+                <h1>{{leave.leave_type}}</h1>
+            </div>
+            <div class="data-item-med">
+                <h1>{{absence_hours}} hours</h1>
+            </div>
 
-            <button id="approve-btn" class="btn green-text" data-record="{{id}}"><i class="uil uil-check-circle"></i> Approve</button>
-            <button id="deny-btn" class="btn red-text" data-record="{{id}}"><i class="uil uil-times-circle"></i></i> Deny</button>
-   
-        
-        
-    </div>
+                <button id="approve-btn" class="btn green-text" data-record="{{id}}"><i class="uil uil-check-circle"></i> Approve</button>
+                <button id="deny-btn" class="btn red-text" data-record="{{id}}"><i class="uil uil-times-circle"></i></i> Deny</button>
+            </div>
+    </article>
+    {{/each}}
 
-
-</article>
-
-
-{{/each}}
+</div>
 
 {{#if absence}}
 <script src="/javascript/absence-approval.js"></script>
