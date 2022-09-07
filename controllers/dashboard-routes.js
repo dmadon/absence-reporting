@@ -101,9 +101,7 @@ router.get('/edit-absence/:id',withAuth,(req,res) => {
                 const types = leaveData.map(type => type.get({plain:true}));
                 return types
             })
-        console.log(leave_options)
-        console.log(absence.start_date)
-        console.log(absence.end_date)
+
         res.render('edit-absence',{
             leave_options,
             absence,

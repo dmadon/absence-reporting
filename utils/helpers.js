@@ -22,15 +22,17 @@ module.exports = {
             month = `${new Date(value).getMonth()+1}`
         };
 
-        if(new Date(value).getMonth()<10){
-            month = `0${new Date(value).getMonth()+1}`
+        var day = ''
+        if(new Date(value).getDate()<10){
+            day = `0${new Date(value).getDate()}`
         }
         else{
-            month = `${new Date(value).getMonth()+1}`
-        };
+            day = `${new Date(value).getDate()}`
+        }
         
        
         
-        return `${new Date(date).getFullYear()}-${month}-${new Date(date).getDate()}`;
-    }
+        return `${new Date(date).getFullYear()}-${month}-${day}`;
+    },
+
 }
