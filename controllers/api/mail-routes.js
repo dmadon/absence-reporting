@@ -20,8 +20,8 @@ router.post('/new',(req,res)=>{
         port: 587,
         secure: false, // true for 465, false for other ports
         auth: {
-            user: 'deanna.madon@outlook.com', // generated ethereal user
-            pass: 'ncc-1701-D!', // generated ethereal password
+            user: process.env.EMAIL_USER, // generated ethereal user
+            pass: process.env.EMAIL_PASSWORD, // generated ethereal password
         },
         tls:{
             rejectUnauthorized:false
