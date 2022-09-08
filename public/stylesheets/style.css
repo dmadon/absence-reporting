@@ -140,6 +140,15 @@ p {
   box-shadow: 2px 2px var(--dark);
 }
 
+.btn-table{
+  width: 90%;
+  margin: 1rem auto;
+}
+
+.btn-column{
+  width: 15%
+}
+
 .hero, footer {
   padding: 1% 1%;
   border-bottom: 6px solid var(--dark);
@@ -241,6 +250,31 @@ nav {
   min-width: 15%;
 }
 
+table{
+  border-collapse: collapse;
+}
+
+.table-headings-wrapper {
+  border: 2px solid var(--tertiary);
+}
+
+th{
+  background-color: var(--secondary);
+  border-top: 2px solid var(--tertiary);
+  border-bottom: 2px solid var(--tertiary);
+}
+
+td{
+  border-bottom: 2px solid var(--tertiary);
+  margin: 0 2px;
+}
+
+table h2{
+  color:var(--dark);
+}
+
+
+
 /* CARDS */
 .card {
   margin: 0 0 20px 0;
@@ -273,7 +307,7 @@ nav {
 }
 
 
-.card-header h1, .card-header h3, .card-header h4, .hero h1,h2,h3,h4{
+.card-header , .card-header h3, .card-header h4, .hero h1,h2,h3,h4{
   color: var(--primary);
 
 }

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {User} = require('../models');
+const {User, Department} = require('../models');
 
 // THESE ARE THE '/' ROUTES:
 
@@ -17,8 +17,18 @@ router.get('/', async (req,res) => {
             return approvers;
         })
 
+    const department_options = await
+        Department.findAll({
+            order:['name']
+        })
+        .then(departmentData => {
+            const departments = departmentData.map(department => department.get({plain:true}));
+            return departments;
+        })
+
     res.render('login',{
-        approver_options
+        approver_options,
+        department_options
     });
 });
 

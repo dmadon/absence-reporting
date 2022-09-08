@@ -1,0 +1,75 @@
+<div class="flex-column align-center">
+    <div class="card width-75">
+        <div class="card-header"><h1>My Profile</h1></div>
+            <div class="card-body ">
+             
+            <div class="flex-row justify-space-around">
+                <div>
+                    <h1>First Name: {{profile.first_name}}</h1>
+                    <h1>Last Name: {{profile.last_name}}</h1>
+                    <h1>Email: {{profile.email}}</h1>
+                </div>
+                <div>
+                    <h1>Department: {{profile.department.name}}</h1>
+                    <h1>Approver Status: {{is_approver}}</h1>
+                    <h1>My Approver: {{profile.approver.first_name}} {{profile.approver.last_name}}</h1>
+                </div>        
+            </div>
+        </div>
+    </div> {{!--end card--}}
+
+    {{#if is_approver}}
+
+    <div class="card width-75">
+        <div class="card-header"><h1>My Employees</h1></div>
+            <div class="card-body ">
+                <div class="flex-column align-center">
+               
+                        <table >
+
+                                <tr>
+                                    <th class="width-25"><h2>Name</h2></th>
+                                    <th class="width-25"><h2>Department</h2></th>
+                                    <th class="width-25"><h2>Upcoming Absences</h2></th>
+                                </tr>
+                    
+                            {{#each employees}}   
+                            <tbody>
+                                <td><h2>{{last_name}}, {{first_name}}</h2></td>
+                                <td><h2>{{department.name}}</h2></td>
+                                <td class="text-center"><h2>{{upcoming_absences}}</h2></td>
+                            </tbody>
+                            {{/each}}  
+
+
+                        </table>
+
+                  
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {{/if}}
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+{{!-- <script src="/javascript/update-profile.js"></script> --}}

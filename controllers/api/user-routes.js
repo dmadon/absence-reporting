@@ -14,7 +14,7 @@ router.get('/',(req,res) => {
             {
                 model:User,
                 as:'approver',
-                attributes:['id','first_name','last_name'],
+                attributes:['id','first_name','last_name','email'],
                 include:{
                     model:Department
                 }
@@ -22,7 +22,7 @@ router.get('/',(req,res) => {
             {
                 model:User,
                 as:'employees',
-                attributes:['id','first_name','last_name'],
+                attributes:['id','first_name','last_name','email'],
                 include:[
                     {
                         model:Department
@@ -51,14 +51,17 @@ router.get('/:id',(req,res) => {
         attributes:{exclude:['password']},
         include:[
             {
+            model:Department
+            },
+            {
                 model:User,
                 as:'approver',
-                attributes:['id','first_name','last_name']
+                attributes:['id','first_name','last_name','email']
             },
             {
                 model:User,
                 as:'employees',
-                attributes:['id','first_name','last_name'],
+                attributes:['id','first_name','last_name','email'],
                 include:{
                     model:Absence,
                     attributes:['id','start_date','end_date','absence_hours','leave_type_id','status','created_at','updated_at'],

@@ -34,7 +34,10 @@
             </div>
 
                 <div class="flex-row justify-space-around">
-                    <button type="submit" id="save-new-btn" class="btn"><i class="uil uil-save"></i> Save Absence</button>
+                    <button type="submit" id="save-new-btn" class="btn" 
+                        data-user-id="{{user_id}}" 
+                        data-username="{{username}}" 
+                        data-approver-email="{{approver_email}}"><i class="uil uil-save"></i> Save Absence</button>
                     <a href="/dashboard" id="cancel" class="btn text-center"><i class="uil uil-sign-out-alt"></i> Cancel</a>
                 </div>
             

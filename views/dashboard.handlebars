@@ -5,35 +5,37 @@
     <button class="btn green-text" id="new-absence-btn"><i class="uil uil-plus-circle"></i> Create New Absence</button>
 </div>
 
-<div id="absences-holder">
+<div id="absences-holder" class="flex-row justify-center">
 
-    {{#each absence}}
-    <article class="card">
+    <table class="width-100">
+        <tr>
+            <th class="text-left"><h2>Absence Dates</h2></th>
+            <th class="text-left"><h2>Leave Type</h2></th>
+            <th><h2>Absence Hours</h2></th>
+            <th class="text-left"><h2>Status</h2></th>
+            <th><h2>Delete</h2></th>
+            <th><h2>Edit</h2></th>
+        </tr>
 
-        <div class="card-header absence-item flex-row justify-space-between align-center">
-            <div> 
-                {{!-- note: when running application on the local machine, replace 'format_date' with 'date_correct' to display the correct dates on the page. --}}
-                <h1>{{format_date start_date}} - {{format_date end_date}}</h1>
-            </div>
-            <div class="data-item-med">
-                <h1>{{leave.leave_type}}</h1>
-            </div>
-            <div class="data-item-med">
-                <h1>{{absence_hours}} hours</h1>
-            </div>
-            <div class="data-item-med">
-                <h1>{{status}}</h1>
-            </div class="data-item-med">
-            
-            <button id="delete-btn" class="btn red-text" data-record="{{id}}"><i class="uil uil-trash-alt"></i> Delete Absence</button>
-            <button id="edit-btn" class="btn blue-text" data-record="{{id}}"><i class="uil uil-pen"></i> Edit Absence</button>
-        </div>
+        {{#each absence}}
+        <tr>
+            <td><h2>{{format_date start_date}} - {{format_date end_date}}</h2></td>
+            <td><h2>{{leave.leave_type}}</h2></td>
+            <td class="text-center"><h2>{{absence_hours}}</h2></td>
+            <td><h2>{{status}}</h2></td>
+            <td class="btn-column">
+                <button id="delete-btn" class="btn red-text btn-table" data-record="{{id}}"><i class="uil uil-trash-alt"></i> Delete Absence</button>
+            </td>
+            <td class="btn-column">
+                <button id="edit-btn" class="btn blue-text btn-table" data-record="{{id}}"><i class="uil uil-pen"></i> Edit Absence</button>
+            </td>
+        </tr>
+        {{/each}}
 
 
-    </article>
+    </table>
 
 
-    {{/each}}
 
 </div>
 

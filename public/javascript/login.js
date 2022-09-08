@@ -33,22 +33,27 @@ async function signupFormHandler(event){
     }
     else{approver = document.querySelector('#is-approver-signup').value.trim()}
 
-    var myApprover = ''
+    
 
-    if(document.querySelector('#my-approver-signup').value.trim()==0){
-        myApprover = null
-    }
-    else{myApprover = document.querySelector('#my-approver-signup').value.trim()}
+// IF WE NEED TO ACCEPT A NULL VALUE FOR THE APPROVER DROPDOWN BOX, 
+// WE CAN USE THIS IF STATEMENT, SET THE VALUE OF 'const approver_id' to 'myApprover'
+// AND REMOVE THE 'approver_id' parameter from the list of requirements on line 56
+    // var myApprover = ''    
+    // if(document.querySelector('#my-approver-signup').value.trim()==0){
+    //     myApprover = null
+    // }
+    // else{myApprover = document.querySelector('#my-approver-signup').value.trim()}
 
     const first_name = document.querySelector('#first_name-signup').value.trim();
     const last_name = document.querySelector('#last_name-signup').value.trim();
     const is_approver = approver;
-    const approver_id = myApprover;
+    const approver_id = document.querySelector('#my-approver-signup').value.trim();
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
+    const department_id = document.querySelector('#my-department-signup').value.trim();
 
 
-    if(first_name && last_name && email && password){
+    if(first_name && last_name && email && password && department_id && approver_id){
         const response = await fetch('/api/users/',{
             method:'POST',
             body: JSON.stringify({
@@ -57,7 +62,8 @@ async function signupFormHandler(event){
                 is_approver,
                 approver_id,
                 email,
-                password
+                password,
+                department_id,
             }),
             headers:{'Content-Type':'application/json'}
         });
@@ -68,7 +74,7 @@ async function signupFormHandler(event){
             alert(response.statusText);
         };
     }
-    else{alert('All fields are required')};
+    else{alert('Please complete all required fields')};
 };
 
 document.querySelector('.login-form').addEventListener('submit',loginFormHandler);
