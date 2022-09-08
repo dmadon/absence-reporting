@@ -9,7 +9,7 @@ router.post('/new',(req,res)=>{
 
 
     const output = `
-        <p>${req.body.username} has entered a new absence requests for ${req.body.start_date} - ${req.body.end_date}. Please log in to https://absence-reporting.herokuapp.com/ to approve or deny the absence.</p>
+        <p>${req.body.username} has entered a new absence request for ${req.body.start_date} - ${req.body.end_date}. Please log in to https://absence-reporting.herokuapp.com/ to approve or deny the absence.</p>
     `;
     // async..await is not allowed in global scope, must use a wrapper
     async function main() {
@@ -20,8 +20,8 @@ router.post('/new',(req,res)=>{
         port: 587,
         secure: false, // true for 465, false for other ports
         auth: {
-            user: process.env.EMAIL_USER, // generated ethereal user
-            pass: process.env.EMAIL_PASSWORD, // generated ethereal password
+            user: 'deanna.madon@outlook.com', // generated ethereal user
+            pass: 'ncc-1701-D!', // generated ethereal password
         },
         tls:{
             rejectUnauthorized:false
