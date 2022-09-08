@@ -30,14 +30,6 @@ async function queueHandler(event){
     }  
 };
 
-// async function denyAbsence(event){
-    
-//     event.preventDefault();
-
-//     id = event.target.getAttribute("data-record");
-
-    
-// };
 
 
 

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const withAuth = require('../utils/auth');
-const {User, Absence, Leave} = require('../models');
+const {User, Absence, Leave, Department} = require('../models');
 
 
 // THESE ARE THE '/dashboard' ROUTES:
@@ -56,9 +56,41 @@ router.get('/new-absence',withAuth, async (req,res) => {
                 const types = leaveData.map(type => type.get({plain:true}));
                 return types
             })
+
+    const approver_email = await
+            User.findOne({
+                where:{
+                    id:req.session.user_id
+                },
+                attributes:{exclude:['password']},
+                include:[
+                    {
+                    model:Department
+                    },
+                    {
+                        model:User,
+                        as:'approver',
+                        attributes:['id','first_name','last_name','email']
+                    },
+                    {
+                        model:User,
+                        as:'employees',
+                        attributes:['id','first_name','last_name','email'],
+                        include:{
+                            model:Absence,
+                            attributes:['id','start_date','end_date','absence_hours','leave_type_id','status','created_at','updated_at'],
+                        }
+                    }
+                ]
+            })
+            .then(userRecord => {
+                const record = userRecord.get({plain:true});
+                return record.approver.email
+            })
    
     res.render('new-absence',{
         leave_options,
+        approver_email,
         user_id:req.session.user_id,
         loggedIn:req.session.loggedIn,
         username:req.session.username,

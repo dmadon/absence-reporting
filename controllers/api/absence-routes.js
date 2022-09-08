@@ -249,5 +249,4 @@ router.put('/denial/:id',withAuth,(req,res) => {
     });
 });
 
-
 module.exports = router; 
