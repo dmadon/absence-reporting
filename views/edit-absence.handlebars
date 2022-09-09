@@ -2,9 +2,7 @@
 
     <div class="form-container">
         <form class="form edit-absence-form">
-
-
-            
+   
             <div class="flex-row justify-center">
                 <div class="form-item width-50">
                     <label for="edit-start-date" class="form-label">Edit Start Date:</label>
@@ -36,7 +34,16 @@
             </div>
 
                 <div class="flex-row justify-space-around">
-                    <button type="submit" id="save-changes-btn" class="btn"><i class="uil uil-save"></i> Save Changes</button>
+                    <button type="submit" id="save-changes-btn" class="btn"
+                        data-user-id="{{user_id}}" 
+                        data-username="{{username}}" 
+                        data-approver-email="{{absence.user.approver.email}}"
+                        data-orig-start="{{absence.start_date}}"
+                        data-orig-end="{{absence.end_date}}"
+                        data-orig-leave-type="{{absence.leave.leave_type}}"
+                        data-orig-absence-hours="{{absence.absence_hours}}"
+                        
+                        ><i class="uil uil-save"></i> Save Changes</button>
                     <a href="/dashboard" id="cancel" class="btn text-center"><i class="uil uil-sign-out-alt"></i> Cancel</a>
                 </div>
             

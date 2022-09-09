@@ -38,7 +38,6 @@ async function saveNewAbsence(event){
                 })
             })
         }
-
         else{
             alert(response.statusText)
         };
