@@ -31,11 +31,17 @@ router.get('/',withAuth,(req,res) => {
     })
     .then(dbAbsenceData => {
         const absence = dbAbsenceData.map(absence => absence.get({plain:true}));
-        const user_id = req.session.user_id;
-        const username = req.session.username;
-        const is_approver = req.session.is_approver;
-        const loggedIn = req.session.loggedIn;
-        res.render('dashboard',{dbAbsenceData,absence, user_id, username, is_approver, loggedIn});
+        // const user_id = req.session.user_id;
+        // const username = req.session.username;
+        // const is_approver = req.session.is_approver;
+        // const loggedIn = req.session.loggedIn;
+        res.render('dashboard',{
+            absence, 
+            user_id:req.session.user_id,
+            loggedIn:req.session.loggedIn,
+            username:req.session.username,
+            is_approver:req.session.is_approver
+        });
     })
     .catch(err => {
         console.log(err);
