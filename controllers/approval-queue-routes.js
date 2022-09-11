@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const withAuth = require('../utils/auth');
-const {User,Absence,Leave} = require('../models');
+const {User,Absence,Leave, Department} = require('../models');
 
 // THESE ARE THE '/approval-queue' ROUTES:
 
@@ -22,6 +22,16 @@ router.get('/',withAuth,(req,res) => {
                     approver_id:req.session.user_id
                 },
                 attributes:{exclude:['password']},
+                include:[
+                    {
+                        model:User,
+                        as:'approver',
+                        attributes:['id','first_name','last_name','email']
+                    },
+                    {
+                        model:Department
+                    }                   
+                ]
             }
         ]
     })

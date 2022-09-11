@@ -86,9 +86,7 @@ console.log(req.body)
         Please log in to https://absence-reporting.herokuapp.com/ to approve or deny these changes.</p>
     `;
 
-    // async..await is not allowed in global scope, must use a wrapper
-    async function main() {
-        
+    async function main() {        
         // send mail with defined transport object
         let info = await transporter.sendMail({
         from: '"Group 6" <bootcampgroup6@gmail.com>', // sender address
@@ -127,9 +125,7 @@ router.post('/delete',(req,res)=>{
             </p>
         `;
     
-        // async..await is not allowed in global scope, must use a wrapper
-        async function main() {
-            
+        async function main() {            
             // send mail with defined transport object
             let info = await transporter.sendMail({
             from: '"Group 6" <bootcampgroup6@gmail.com>', // sender address
@@ -145,5 +141,87 @@ router.post('/delete',(req,res)=>{
         }    
         main().catch(console.error);
     });
+
+
+// APPROVED ABSENCE EMAIL TO USER:
+router.post('/approved',(req,res)=>{
+
+    console.log(req.body)
+    
+        const output = `
+            <p>${req.body.approvername} has approved an absence request for ${req.body.username}. Details for the absence are listed below.
+    
+            </br>       
+           
+            <ul><strong>Approved Absence Details:</strong>
+            <li>Start Date: ${req.body.start_date}</li>
+            <li>End Date: ${req.body.end_date}</li>
+            <li>Leave Type: ${req.body.leave_type}</li>
+            <li>Absence Hours: ${req.body.absence_hours}</li>
+            </ul>
+    
+            </br>
+    
+            </p>
+        `;
+    
+        async function main() {            
+            // send mail with defined transport object
+            let info = await transporter.sendMail({
+            from: '"Group 6" <bootcampgroup6@gmail.com>', // sender address
+            to: `${req.body.user_email}`, // list of receivers
+            subject: `Approved Absence Request for ${req.body.username}`, // Subject line
+            text: "Hello", // plain text body
+            html: output, // html body
+            });
+        
+            console.log("Message sent: %s", info.messageId);  
+            console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+            console.log("Email sent to "+req.body.user_email);       
+        }    
+        main().catch(console.error);
+    });
+
+// DENIED ABSENCE EMAIL TO USER:
+router.post('/denied',(req,res)=>{
+
+    console.log(req.body)
+    
+        const output = `
+            <p>${req.body.approvername} has denied an absence request. Details for the absence are listed below.
+    
+            </br>       
+           
+            <ul><strong>Denied Absence Details:</strong>
+            <li>Start Date: ${req.body.start_date}</li>
+            <li>End Date: ${req.body.end_date}</li>
+            <li>Leave Type: ${req.body.leave_type}</li>
+            <li>Absence Hours: ${req.body.absence_hours}</li>
+            </ul>
+    
+            </br>
+    
+            </p>
+        `;
+    
+        async function main() {            
+            // send mail with defined transport object
+            let info = await transporter.sendMail({
+            from: '"Group 6" <bootcampgroup6@gmail.com>', // sender address
+            to: `${req.body.user_email}`, // list of receivers
+            subject: `Denied Absence Request for ${req.body.username}`, // Subject line
+            text: "Hello", // plain text body
+            html: output, // html body
+            });
+        
+            console.log("Message sent: %s", info.messageId);  
+            console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+            console.log("Email sent to "+req.body.user_email);       
+        }    
+        main().catch(console.error);
+    });
+
+
+    
 
 module.exports = router;
