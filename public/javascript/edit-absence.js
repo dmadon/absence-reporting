@@ -66,5 +66,3 @@ async function saveChanges(event){
         };
     };
 };
-
-document.querySelector('#save-changes-btn').addEventListener('click',saveChanges);

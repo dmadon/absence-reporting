@@ -10,12 +10,12 @@ async function saveNewAbsence(event){
     const leave_type = await fetch (`/api/leave/${leave_type_id}`).then(response => response.json()).then(value => {return value.leave_type});
 
     const absence_hours = document.querySelector('#new-hours').value.trim();
-
-   
+    
+       
     if(!start_date||!end_date||!leave_type_id||!absence_hours){
         alert('Please complete all form fields');
     }
-    else{
+    else{ 
         const response = await fetch('/api/absences',{
             method:'POST',
             headers:{'Content-Type':'application/json'},
@@ -38,7 +38,8 @@ async function saveNewAbsence(event){
                     approver_email,
                     start_date,
                     end_date,
-                    leave_type
+                    leave_type,
+                    absence_hours
                 })
             })
         }
