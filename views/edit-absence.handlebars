@@ -2,22 +2,19 @@
 
     <div class="form-container">
         <form class="form edit-absence-form">
-
-
-            
+   
             <div class="flex-row justify-center">
                 <div class="form-item width-50">
                     <label for="edit-start-date" class="form-label">Edit Start Date:</label>
                     {{!-- note: when running this application on the local machine, use the 'date_input_format' helper before absence.start_date --}}
-                    <input id="edit-start-date" class="form-input" type="date" value="{{absence.start_date}}">
-                </div>
+                    <input id="edit-start-date" class="form-input" type="input" value="{{format_date absence.start_date}}">                   
+                </div>               
                 <div class="form-item width-50">
                     <label for="edit-end-date" class="form-label">Edit End Date:</label>
                     {{!-- note: when running this application on the local machine, use the 'date_input_format' helper before absence.end_date --}}
-                    <input id="edit-end-date"  class="form-input" type="date" value="{{absence.end_date}}">
+                    <input id="edit-end-date"  class="form-input" type="input" value="{{format_date absence.end_date}}">
                 </div>
             </div>
-
 
             <div class="flex-row justify-center">
                 <div class="form-item width-50">
@@ -35,15 +32,20 @@
                 </div>
             </div>
 
-                <div class="flex-row justify-space-around">
-                    <button type="submit" id="save-changes-btn" class="btn"><i class="uil uil-save"></i> Save Changes</button>
-                    <a href="/dashboard" id="cancel" class="btn text-center"><i class="uil uil-sign-out-alt"></i> Cancel</a>
-                </div>
-            
+            <div class="flex-row justify-space-around">
+                <button type="submit" id="save-changes-btn" class="btn"
+                    data-user-id="{{user_id}}" 
+                    data-username="{{username}}" 
+                    data-approver-email="{{absence.user.approver.email}}"
+                    data-orig-start="{{absence.start_date}}"
+                    data-orig-end="{{absence.end_date}}"
+                    data-orig-leave-type="{{absence.leave.leave_type}}"
+                    data-orig-absence-hours="{{absence.absence_hours}}">
+                    <i class="uil uil-save"></i> Save Changes</button>
+                <a href="/dashboard" id="cancel" class="btn text-center"><i class="uil uil-sign-out-alt"></i> Cancel</a>
+            </div>            
         </form>
-
     </div>
-
 </div>
 
 <script src="/javascript/edit-absence.js"></script>

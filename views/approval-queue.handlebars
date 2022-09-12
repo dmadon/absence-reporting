@@ -8,6 +8,10 @@
     {{#each absence}}
     <article class="card">
 
+
+       
+
+
         <div class="card-header approval-item flex-row justify-space-between align-center">
             <div class="data-item-med">
                 <h1>{{user.first_name}} {{user.last_name}}</h1>
@@ -23,8 +27,26 @@
                 <h1>{{absence_hours}} hours</h1>
             </div>
 
-                <button id="approve-btn" class="btn green-text" data-record="{{id}}"><i class="uil uil-check-circle"></i> Approve</button>
-                <button id="deny-btn" class="btn red-text" data-record="{{id}}"><i class="uil uil-times-circle"></i></i> Deny</button>
+                <button id="approve-btn" class="btn green-text"
+                    data-record="{{id}}"
+                    data-username="{{user.first_name}} {{user.last_name}}"
+                    data-user-email="{{user.email}}"
+                    data-start-date="{{format_date start_date}}"
+                    data-end-date="{{format_date end_date}}"
+                    data-leave-type="{{leave.leave_type}}"
+                    data-absence-hours="{{absence_hours}}"
+                    data-approvername="{{user.approver.first_name}} {{user.approver.last_name}}">
+                    <i class="uil uil-check-circle"></i> Approve</button>
+                <button id="deny-btn" class="btn red-text"
+                    data-record="{{id}}"
+                    data-username="{{user.first_name}} {{user.last_name}}"
+                    data-user-email="{{user.email}}"
+                    data-start-date="{{format_date start_date}}"
+                    data-end-date="{{format_date end_date}}"
+                    data-leave-type="{{leave.leave_type}}"
+                    data-absence-hours="{{absence_hours}}"
+                    data-approvername="{{user.approver.first_name}} {{user.approver.last_name}}">
+                    <i class="uil uil-times-circle"></i></i> Deny</button>
             </div>
     </article>
     {{/each}}

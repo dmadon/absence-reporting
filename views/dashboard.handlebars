@@ -1,6 +1,7 @@
 <div class="flex-row justify-space-between justify-center">
     <h1 class="page-title">Dashboard: {{username}}</h1>
 </div>
+
 <div class="flex-row justify-center">
     <button class="btn green-text" id="new-absence-btn"><i class="uil uil-plus-circle"></i> Create New Absence</button>
 </div>
@@ -18,13 +19,21 @@
         </tr>
 
         {{#each absence}}
-        <tr>
+        <tr>      
             <td><h2>{{format_date start_date}} - {{format_date end_date}}</h2></td>
             <td><h2>{{leave.leave_type}}</h2></td>
             <td class="text-center"><h2>{{absence_hours}}</h2></td>
             <td><h2>{{status}}</h2></td>
             <td class="btn-column">
-                <button id="delete-btn" class="btn red-text btn-table" data-record="{{id}}"><i class="uil uil-trash-alt"></i> Delete Absence</button>
+                <button id="delete-btn" class="btn red-text btn-table"
+                data-record="{{id}}"
+                data-user-id="{{user_id}}"
+                data-start-date="{{start_date}}"
+                data-end-date="{{end_date}}"
+                data-leave-type="{{leave.leave_type}}"
+                data-absence-hours="{{absence_hours}}"
+                data-approver-email="{{user.approver.email}}">
+                <i class="uil uil-trash-alt"></i> Delete Absence</button>
             </td>
             <td class="btn-column">
                 <button id="edit-btn" class="btn blue-text btn-table" data-record="{{id}}"><i class="uil uil-pen"></i> Edit Absence</button>

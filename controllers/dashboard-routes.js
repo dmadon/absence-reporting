@@ -35,7 +35,14 @@ router.get('/',withAuth,(req,res) => {
         const username = req.session.username;
         const is_approver = req.session.is_approver;
         const loggedIn = req.session.loggedIn;
-        res.render('dashboard',{dbAbsenceData,absence, user_id, username, is_approver, loggedIn});
+       
+        res.render('dashboard',{
+            absence, 
+            user_id,
+            loggedIn,
+            username,
+            is_approver
+        });
     })
     .catch(err => {
         console.log(err);

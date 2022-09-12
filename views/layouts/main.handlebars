@@ -4,30 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CMD Financial, Inc. Employee Absence Reporting</title>
+    <title>CMD Financial, Inc. Employee Absence Reporting</title>   
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
-<body>
+<body>    
+    <header class="hero flex-row justify-space-between align-bottom">
+        <h1 class="app-title">Employee Absence Reporting</h1>
 
-    
-        <header class="hero flex-row justify-space-between align-bottom">
-                <h1 class="app-title">Employee Absence Reporting</h1>
-
-                <nav class="flex-row align-center justify-space-around">
-                    {{#if is_approver}}
-                       <a href='/approval-queue' id="approval-queue" class="nav-item btn-no-style"></i><h3><i class="uil uil-clipboard-notes"></i> Approval Queue</h3></a>
-                    {{/if}}
-                    {{#if loggedIn}}
-                        <a href ='/profile' id="profile" class="nav-item btn-no-style"><h3><i class="uil uil-user"></i> Profile</h3></a>
-                        <a href='/dashboard' id="dashboard" class="nav-item btn-no-style"><h3><i class="uil uil-dashboard"></i> Dashboard</h3></a>
-                        <button id="logout" class="btn-no-style nav-item"><h3><i class="uil uil-signout"></i> Log Out</h3></button>
-                    {{/if}}
-                </nav>
-                
-
-        </header>
+        <nav class="flex-row align-center justify-space-around">
+            {{#if is_approver}}
+                <a href='/approval-queue' id="approval-queue" class="nav-item btn-no-style"></i><h3><i class="uil uil-clipboard-notes"></i> Approval Queue</h3></a>
+            {{/if}}
+            {{#if loggedIn}}
+                <a href ='/profile' id="profile" class="nav-item btn-no-style"><h3><i class="uil uil-user"></i> Profile</h3></a>
+                <a href='/dashboard' id="dashboard" class="nav-item btn-no-style"><h3><i class="uil uil-dashboard"></i> Dashboard</h3></a>
+                <button id="logout" class="btn-no-style nav-item"><h3><i class="uil uil-signout"></i> Log Out</h3></button>
+            {{/if}}
+        </nav>
+    </header>
     </div>
         <main>
             {{{body}}}
@@ -37,6 +33,12 @@
         </footer>
     </div>
 
+
+
 {{#if loggedIn}}
 <script src="/javascript/logout.js"></script>
 {{/if}}
+
+
+
+</body>
