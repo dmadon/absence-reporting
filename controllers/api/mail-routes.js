@@ -1,17 +1,21 @@
 const router = require('express').Router();
 const nodemailer = require('nodemailer');
+require('dotenv').config();
 
 // THESE ARE THE '/api/mail' ROUTES:
 
 // create reusable transporter object using the default SMTP transport
-const transporter = nodemailer.createTransport({
-    // host: "smtp-mail.outlook.com", outlook stopped sending emails because it thought they were spam. trying 'Send in Blue' email delivery service with gmail account instead...
-    host: "smtp-relay.sendinblue.com",
-    port: 587,
-    secure: false, // true for 465, false for other ports
+const transporter = nodemailer.createTransport({  
+    service: "gmail",
+    // port: 587,
+    // secure: false, // set true for 465, false for other ports
     auth: {
+        type: "OAuth2",
         user: process.env.EMAIL_USER, 
         pass: process.env.EMAIL_PASSWORD,
+        clientId: process.env.OAUTH_CLIENTID,
+        clientSecret: process.env.OAUTH_CLIENT_SECRET,
+        refreshToken: process.env.OAUTH_REFRESH_TOKEN,
     },
     tls:{
         rejectUnauthorized:false
@@ -41,7 +45,7 @@ router.post('/new',(req,res)=>{
     async function main() {  
         // send mail with defined transport object
         let info = await transporter.sendMail({
-        from: '"Group 6" <bootcampgroup6@gmail.com>', // sender address
+        from: '"Absence Reporting App" <deanna.nodemailer@gmail.com>', // sender address
         to: `${req.body.approver_email}`, // list of receivers
         subject: `New Absence Request for ${req.body.username}`, // Subject line
         text: "Hello", // plain text body
@@ -89,7 +93,7 @@ console.log(req.body)
     async function main() {        
         // send mail with defined transport object
         let info = await transporter.sendMail({
-        from: '"Group 6" <bootcampgroup6@gmail.com>', // sender address
+        from: '"Absence Reporting App" <deanna.nodemailer@gmail.com>', // sender address
         to: `${req.body.approver_email}`, // list of receivers
         subject: `Updated Absence Request for ${req.body.username}`, // Subject line
         text: "Hello", // plain text body
@@ -128,7 +132,7 @@ router.post('/delete',(req,res)=>{
         async function main() {            
             // send mail with defined transport object
             let info = await transporter.sendMail({
-            from: '"Group 6" <bootcampgroup6@gmail.com>', // sender address
+            from: '"Absence Reporting App" <deanna.nodemailer@gmail.com>', // sender address
             to: `${req.body.approver_email}`, // list of receivers
             subject: `Deleted Absence Request for ${req.body.username}`, // Subject line
             text: "Hello", // plain text body
@@ -168,7 +172,7 @@ router.post('/approved',(req,res)=>{
         async function main() {            
             // send mail with defined transport object
             let info = await transporter.sendMail({
-            from: '"Group 6" <bootcampgroup6@gmail.com>', // sender address
+            from: '"Absence Reporting App" <deanna.nodemailer@gmail.com>', // sender address
             to: `${req.body.user_email}`, // list of receivers
             subject: `Approved Absence Request for ${req.body.username}`, // Subject line
             text: "Hello", // plain text body
@@ -207,7 +211,7 @@ router.post('/denied',(req,res)=>{
         async function main() {            
             // send mail with defined transport object
             let info = await transporter.sendMail({
-            from: '"Group 6" <bootcampgroup6@gmail.com>', // sender address
+            from: '"Absence Reporting App" <deanna.nodemailer@gmail.com>', // sender address
             to: `${req.body.user_email}`, // list of receivers
             subject: `Denied Absence Request for ${req.body.username}`, // Subject line
             text: "Hello", // plain text body
