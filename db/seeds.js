@@ -1,29 +1,60 @@
 const db = require('../config/connection');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
+
+const seedDepartments = () => {
+    const seeds = () => {
+        const sql = `INSERT INTO department (name)
+        VALUES
+            ('Human Resources'),
+            ('Purchasing'),
+            ('Accounts Payable'),
+            ('Wealth Management'),
+            ('Customer Service');`
+    
+         
+        return db.query(sql, {
+            type: db.QueryTypes.INSERT
+        });
+    }
+    seeds();
+    console.log('Departments seeded!');
+};
+
+const seedLeaveTypes = () => {
+    const seeds = () => {
+        const sql = `INSERT INTO leave (leave_type)
+        VALUES
+            ('Vacation'),
+            ('Personal Illness'),
+            ('Family Illness'),
+            ('Parental Leave'),
+            ('Bereavement');`
+    
+         
+        return db.query(sql, {
+            type: db.QueryTypes.INSERT
+        });
+    }
+    seeds();
+    console.log('Leave Types seeded!');
+};
+
+
 
 const seedUsers = async () => {
 
     const userSeeds = [
         {
-            first_name: 'Deanna',
-            last_name: 'Madon',
+            first_name: 'Primary',
+            last_name: 'Approver',
             is_approver: 1,
             is_admin: 1,
             department_id: 3,
             approver_id: null,
-            email: 'deanna.madon@gmail.com',
-            password: 'deanna'
-        },
-        {
-            first_name: 'Chuck',
-            last_name: 'Norris',
-            is_approver: 1,
-            is_admin: 1,
-            department_id: 1,
-            approver_id: 1,
-            email: 'chuck@example.com',
-            password: 'chuck'
-        }
+            email: process.env.SEED_APPROVER_EMAIL,
+            password: process.env.SEED_APPROVER_PW
+        }       
     ];
 
     const hashPasswords = userSeeds.map(
@@ -57,6 +88,9 @@ const seedUsers = async () => {
             replacements: params
         });
     });
+    console.log('Users seeded!');
 };
 
+seedDepartments();
+// seedLeaveTypes();
 seedUsers();

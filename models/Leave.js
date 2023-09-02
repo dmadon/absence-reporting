@@ -24,7 +24,7 @@ Leave.init(
         timestamps:false,
         modelName:'leave'
     }
-)
+);
 
 
 
