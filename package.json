@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "seed":"node db/seeds.js"
+    "seed": "node db/seeds.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "connect-session-sequelize": "^7.1.4",
+    "dayjs": "^1.11.9",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "express-handlebars": "^6.0.6",

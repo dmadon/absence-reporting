@@ -5,10 +5,8 @@ async function queueHandler(event){
     const id = event.target.getAttribute("data-record");
     const username = event.target.getAttribute("data-username");
     const user_email = event.target.getAttribute("data-user-email");
-    const stored_start_date = event.target.getAttribute("data-start-date");
-    const start_date = `${new Date(stored_start_date).getMonth()+1}/${new Date(stored_start_date).getDate()}/${new Date(stored_start_date).getFullYear()}`;
-    const stored_end_date = event.target.getAttribute("data-end-date");
-    const end_date = `${new Date(stored_end_date).getMonth()+1}/${new Date(stored_end_date).getDate()}/${new Date(stored_end_date).getFullYear()}`;
+    const start_date = event.target.getAttribute("data-start-date");
+    const end_date = event.target.getAttribute("data-end-date");
     const leave_type = event.target.getAttribute("data-leave-type");
     const approvername = event.target.getAttribute("data-approvername");
     const absence_hours = event.target.getAttribute("data-absence-hours")

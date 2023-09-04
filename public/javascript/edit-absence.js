@@ -6,19 +6,15 @@ async function saveChanges(event){
     
     // THESE ARE THE UPDATES THE USER HAS MADE SO THAT WE CAN UPDATE THE ABSENCE RECORD IN THE DATABASE 
     // AND SEND IT IN THE EMAIL TO THE APPROVER
-    const new_start_date = document.querySelector('#edit-start-date').value.trim();
-    const start_date = `${new Date(new_start_date).getMonth()+1}/${new Date(new_start_date).getDate()}/${new Date(new_start_date).getFullYear()}`
-    const new_end_date =  document.querySelector('#edit-end-date').value.trim();
-    const end_date = `${new Date(new_end_date).getMonth()+1}/${new Date(new_end_date).getDate()}/${new Date(new_end_date).getFullYear()}`
+    const start_date = document.querySelector('#edit-start-date').value.trim();
+    const end_date =  document.querySelector('#edit-end-date').value.trim();
     const leave_type_id = document.querySelector('#edit-leave').value.trim();
     const leave_type = await fetch (`/api/leave/${leave_type_id}`).then(response => response.json()).then(value => {return value.leave_type});
     const absence_hours = document.querySelector('#edit-hours').value.trim();
     
     // THIS IS THE ORIGINAL ABSENCE DATA SO THAT WE CAN SEND IT IN THE EMAIL TO THE APPROVER
-    const stored_start_date = event.target.getAttribute("data-orig-start");
-    const orig_start_date = `${new Date(stored_start_date).getMonth()+1}/${new Date(stored_start_date).getDate()}/${new Date(stored_start_date).getFullYear()}`
-    const stored_end_date = event.target.getAttribute("data-orig-end");
-    const orig_end_date = `${new Date(stored_end_date).getMonth()+1}/${new Date(stored_end_date).getDate()}/${new Date(stored_end_date).getFullYear()}`
+    const orig_start_date = event.target.getAttribute("data-orig-start");
+    const orig_end_date = event.target.getAttribute("data-orig-end");
     const orig_leave_type = event.target.getAttribute("data-orig-leave-type");
     const orig_absence_hours = event.target.getAttribute("data-orig-absence-hours");
 
@@ -30,6 +26,7 @@ async function saveChanges(event){
         alert('Please complete all form fields');
     }
     else{
+        // UPDATE THE ABSENCE RECORD IN THE DATABASE
         const response = await fetch (`/api/absences/${id}`,{
             method:'PUT',
             headers:{'Content-Type':'application/json'},
@@ -66,3 +63,5 @@ async function saveChanges(event){
         };
     };
 };
+
+document.querySelector('#save-changes-btn').addEventListener('click',saveChanges);

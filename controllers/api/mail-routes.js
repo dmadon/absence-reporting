@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const nodemailer = require('nodemailer');
+const {format_date} = require('../../utils/helpers');
 require('dotenv').config();
 
 // THESE ARE THE '/api/mail' ROUTES:
@@ -7,8 +8,8 @@ require('dotenv').config();
 // create reusable transporter object using the default SMTP transport
 const transporter = nodemailer.createTransport({  
     service: "gmail",
-    // port: 587,
-    // secure: false, // set true for 465, false for other ports
+    port: 465,
+    secure: true, // set true for 465, false for other ports
     auth: {
         type: "OAuth2",
         user: process.env.EMAIL_USER, 
@@ -16,6 +17,7 @@ const transporter = nodemailer.createTransport({
         clientId: process.env.OAUTH_CLIENTID,
         clientSecret: process.env.OAUTH_CLIENT_SECRET,
         refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+        accessToken: process.env.OAUTH_ACCESS_TOKEN,
     },
     tls:{
         rejectUnauthorized:false
@@ -30,8 +32,8 @@ router.post('/new',(req,res)=>{
 
         </br>
         <ul><strong>New Absence Details:</strong>
-        <li>Start Date: ${req.body.start_date}</li>
-        <li>End Date: ${req.body.end_date}</li>
+        <li>Start Date: ${format_date(req.body.start_date)}</li>
+        <li>End Date: ${format_date(req.body.end_date)}</li>
         <li>Leave Type: ${req.body.leave_type}</li>
         <li>Absence Hours: ${req.body.absence_hours}</li>
         </ul>
@@ -41,7 +43,6 @@ router.post('/new',(req,res)=>{
         Please log in to https://absence-reporting.herokuapp.com/ to approve or deny the absence.</p>
     `;
 
-    // async..await is not allowed in global scope, must use a wrapper
     async function main() {  
         // send mail with defined transport object
         let info = await transporter.sendMail({
@@ -71,16 +72,16 @@ console.log(req.body)
         </br>
         
         <ul><strong>Orignal Absence Details:</strong>
-        <li>Start Date: ${req.body.orig_start_date}</li>
-        <li>End Date: ${req.body.orig_end_date}</li>
+        <li>Start Date: ${format_date(req.body.orig_start_date)}</li>
+        <li>End Date: ${format_date(req.body.orig_end_date)}</li>
         <li>Leave Type: ${req.body.orig_leave_type}</li>
         <li>Absence Hours: ${req.body.orig_absence_hours}</li>
         </ul>
 
         </br>
         <ul><strong>New Absence Details:</strong>
-        <li>Start Date: ${req.body.start_date}</li>
-        <li>End Date: ${req.body.end_date}</li>
+        <li>Start Date: ${format_date(req.body.start_date)}</li>
+        <li>End Date: ${format_date(req.body.end_date)}</li>
         <li>Leave Type: ${req.body.leave_type}</li>
         <li>Absence Hours: ${req.body.absence_hours}</li>
         </ul>
@@ -118,8 +119,8 @@ router.post('/delete',(req,res)=>{
             </br>       
            
             <ul><strong>Deleted Absence Details:</strong>
-            <li>Start Date: ${req.body.start_date}</li>
-            <li>End Date: ${req.body.end_date}</li>
+            <li>Start Date: ${format_date(req.body.start_date)}</li>
+            <li>End Date: ${format_date(req.body.end_date)}</li>
             <li>Leave Type: ${req.body.leave_type}</li>
             <li>Absence Hours: ${req.body.absence_hours}</li>
             </ul>
@@ -158,8 +159,8 @@ router.post('/approved',(req,res)=>{
             </br>       
            
             <ul><strong>Approved Absence Details:</strong>
-            <li>Start Date: ${req.body.start_date}</li>
-            <li>End Date: ${req.body.end_date}</li>
+            <li>Start Date: ${format_date(req.body.start_date)}</li>
+            <li>End Date: ${format_date(req.body.end_date)}</li>
             <li>Leave Type: ${req.body.leave_type}</li>
             <li>Absence Hours: ${req.body.absence_hours}</li>
             </ul>
@@ -197,8 +198,8 @@ router.post('/denied',(req,res)=>{
             </br>       
            
             <ul><strong>Denied Absence Details:</strong>
-            <li>Start Date: ${req.body.start_date}</li>
-            <li>End Date: ${req.body.end_date}</li>
+            <li>Start Date: ${format_date(req.body.start_date)}</li>
+            <li>End Date: ${format_date(req.body.end_date)}</li>
             <li>Leave Type: ${req.body.leave_type}</li>
             <li>Absence Hours: ${req.body.absence_hours}</li>
             </ul>

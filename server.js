@@ -9,10 +9,11 @@ const exphbs = require('express-handlebars');
 const hbs = exphbs.create({helpers});
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+require('dotenv').config();
 
 
 const sess = {
-    secret:'SuperTopSecret',
+    secret:process.env.SESS_SECRET,
     cookie:{},
     resave:false,
     saveUninitialized:true,
